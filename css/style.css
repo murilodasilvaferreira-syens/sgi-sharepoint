@@ -426,82 +426,10 @@ section[id] {
    NAVEGAÇÃO (sticky, nunca fixed — ver README.md sobre iframe/SharePoint)
    ========================================================================= */
 
-.nav-topo {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(255, 253, 251, 0.72);
-  backdrop-filter: blur(16px) saturate(170%);
-  -webkit-backdrop-filter: blur(16px) saturate(170%);
-  border-bottom: 1px solid transparent;
-  transition: background var(--transicao-padrao),
-              border-color var(--transicao-padrao),
-              box-shadow var(--transicao-padrao);
-}
-
-/* Ganha fundo sólido e sombra só depois que o usuário rola a página —
-   efeito de vidro discreto sobre o Hero (ver toggle em inicializarNavegacao). */
-.nav-topo--rolado {
-  background: rgba(255, 253, 251, 0.94);
-  border-bottom-color: var(--cor-borda);
-  box-shadow: 0 12px 26px -18px rgba(43, 43, 43, 0.22);
-}
-
-.nav-container {
-  position: relative;
-  max-width: var(--largura-maxima);
-  height: var(--altura-nav);
-  margin: 0 auto;
-  padding: 0 var(--espaco-lg);
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; /* sem marca à esquerda: menu/toggle à direita */
-}
-
-/* Barra fina de progresso de leitura, colada na base da nav.
-   A largura é definida por JS (inicializarNavegacao). */
-.nav-progresso {
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  width: 0;
-  height: 2px;
-  background: var(--degrade-acento);
-  border-radius: 0 var(--raio-pill) var(--raio-pill) 0;
-  transition: width 120ms linear;
-}
-
-.nav-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: var(--cor-branco);
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-sm);
-  color: var(--cor-texto);
-  transition: color var(--transicao-padrao),
-              border-color var(--transicao-padrao),
-              background var(--transicao-padrao);
-}
-
-.nav-toggle:hover {
-  color: var(--cor-acento);
-  border-color: var(--cor-acento);
-  background: var(--cor-acento-suave);
-}
-
-.nav-toggle-icone {
-  display: flex;
-  width: 22px;
-  height: 22px;
-}
-
-.nav-toggle-icone i,
-.nav-toggle-icone svg {
-  width: 22px;
-  height: 22px;
+/* Sem cabeçalho fixo, âncoras internas (como o card 5S das 8 Regras)
+   só precisam de um respiro pequeno, não da altura de uma barra. */
+section[id] {
+  scroll-margin-top: var(--espaco-lg);
 }
 
 /* ---- Menu (mobile = painel flutuante; vira barra horizontal no desktop) --- */
