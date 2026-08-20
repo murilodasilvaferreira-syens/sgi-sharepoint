@@ -41,8 +41,9 @@ function exibirErroSecao(container, mensagem) {
 
 /**
  * Monta o HTML de um ícone, que pode ser uma imagem própria (jpeg/png) ou
- * um ícone da biblioteca Lucide — usado em Links Rápidos, Documentos
- * Padrão e 8 Regras da Qualidade.
+ * um ícone da biblioteca Lucide. Hoje os Links Rápidos usam só "lucide"
+ * (visual padronizado), mas o suporte a "imagem" continua aqui para o caso
+ * de alguma seção futura precisar de um logo próprio.
  * @param {"imagem"|"lucide"} tipo
  * @param {string} valor - caminho da imagem OU nome do ícone Lucide
  * @param {string} altTexto - texto alternativo (só se aplica a imagens)
@@ -58,6 +59,7 @@ function renderizarIcone(tipo, valor, altTexto) {
  * Monta o cabeçalho padrão de uma seção (título + descrição opcional +
  * botão de link externo opcional). Reaproveitado por várias seções para
  * não duplicar o mesmo HTML de título em cada uma.
+ * O <span> dentro do <h2> recebe o traço laranja animado por baixo.
  * @param {string} titulo
  * @param {string} [descricao]
  * @param {{texto: string, link: string}} [botao] - botão extra (ex: "Ver planilha completa")
@@ -65,18 +67,29 @@ function renderizarIcone(tipo, valor, altTexto) {
 function criarCabecalhoSecao(titulo, descricao, botao) {
   const descricaoHtml = descricao ? `<p>${descricao}</p>` : '';
   const botaoHtml = botao
-    ? `<a class="botao" href="${botao.link}" target="_blank" rel="noopener">
+    ? `<a class="botao botao--fantasma" href="${botao.link}" target="_blank" rel="noopener">
          <i data-lucide="external-link" aria-hidden="true"></i>
          ${botao.texto}
        </a>`
     : '';
   return `
     <div class="titulo-secao animar-entrada">
-      <h2>${titulo}</h2>
+      <h2><span class="titulo-secao-texto">${titulo}</span></h2>
       ${descricaoHtml}
       ${botaoHtml}
     </div>
   `;
+}
+
+/**
+ * Aplica um atraso crescente na animação de entrada dos filhos diretos de
+ * um grid, criando o efeito "cascata" (um card entra depois do outro).
+ * O atraso é limitado para que uma lista longa não demore demais a aparecer.
+ */
+function escalonarEntrada(container, seletor) {
+  container.querySelectorAll(seletor).forEach((elemento, indice) => {
+    elemento.style.transitionDelay = `${Math.min(indice, 7) * 70}ms`;
+  });
 }
 
 /* -------------------------------------------------------------------------
@@ -89,6 +102,7 @@ async function inicializarNavegacao() {
   const botaoToggle = document.getElementById('nav-toggle');
   const backdrop = document.getElementById('nav-backdrop');
   const navTopo = document.querySelector('.nav-topo');
+  const barraProgresso = document.getElementById('nav-progresso');
 
   try {
     const config = await carregarJSON('data/config.json');
@@ -160,19 +174,30 @@ async function inicializarNavegacao() {
   // sombra depois que o usuário rola a página — efeito de vidro discreto,
   // comum em produtos premium, sem nunca usar position:fixed (ver nota no
   // topo do index.html sobre a restrição do embed em iframe).
+  // No mesmo listener, atualizamos a barra fina de progresso de leitura.
   window.addEventListener(
     'scroll',
     () => {
       navTopo.classList.toggle('nav-topo--rolado', window.scrollY > 40);
+      atualizarBarraProgresso();
     },
     { passive: true }
   );
+
+  function atualizarBarraProgresso() {
+    if (!barraProgresso) return;
+    const rolavel = document.documentElement.scrollHeight - window.innerHeight;
+    const percentual = rolavel > 0 ? (window.scrollY / rolavel) * 100 : 0;
+    barraProgresso.style.width = `${Math.min(100, Math.max(0, percentual))}%`;
+  }
+
+  atualizarBarraProgresso();
 }
 
 /**
  * Destaca no menu o item correspondente à seção visível no momento
  * ("scroll spy"). Recalcula a partir da posição real das seções a cada
- * scroll — não usa IntersectionObserver aqui de propósito, porque as 10
+ * scroll — não usa IntersectionObserver aqui de propósito, porque as
  * seções carregam seu conteúdo de forma assíncrona e em paralelo (cada
  * uma faz seu próprio fetch), mudando de altura em momentos diferentes;
  * um observer baseado em eventos de entrada/saída pode ficar "preso" num
@@ -231,58 +256,54 @@ function renderHero(config, container) {
   const hero = config.hero;
   const unidadesTexto = hero.unidades.join(' · ');
 
-  const frasesHtml = hero.frases
-    .map((frase, indice) => `<p class="hero-frase${indice === 0 ? ' ativa' : ''}">${frase}</p>`)
+  // O título é dividido em duas partes: a normal e a "destaque", que
+  // recebe o degradê laranja. Se "tituloDestaque" não existir no JSON,
+  // o título simplesmente aparece inteiro em cor sólida.
+  const destaqueHtml = hero.tituloDestaque
+    ? ` <span class="hero-destaque">${hero.tituloDestaque}</span>`
+    : '';
+
+  const acoesHtml = (hero.acoes || [])
+    .map(
+      (acao) => `
+        <a class="botao botao--${acao.estilo === 'fantasma' ? 'fantasma' : 'primario'}" href="${acao.ancora}">
+          <i data-lucide="${acao.icone}" aria-hidden="true"></i>
+          <span>${acao.texto}</span>
+        </a>
+      `
+    )
     .join('');
 
-  const dotsHtml = hero.frases
-    .map((_, indice) => `<span class="hero-frase-dot${indice === 0 ? ' ativa' : ''}"></span>`)
-    .join('');
-
-  container.innerHTML = `
+  // As orbs de fundo já existem no index.html e não devem ser apagadas —
+  // por isso inserimos o conteúdo com insertAdjacentHTML em vez de
+  // sobrescrever o innerHTML do container inteiro.
+  container.insertAdjacentHTML(
+    'beforeend',
+    `
     <div class="container hero-conteudo">
-      <div class="hero-eyebrow animar-entrada">
+      ${
+        hero.eyebrow
+          ? `<span class="hero-eyebrow-pill animar-entrada">${hero.eyebrow}</span>`
+          : ''
+      }
+
+      <h1 class="animar-entrada">${hero.titulo}${destaqueHtml}</h1>
+
+      <p class="hero-frase animar-entrada">${hero.frase}</p>
+
+      <div class="hero-unidades animar-entrada">
         <i data-lucide="map-pin" aria-hidden="true"></i>
         <span>${unidadesTexto}</span>
       </div>
-      <h1 class="animar-entrada">${hero.titulo}</h1>
-      <div class="hero-frase-card animar-entrada">
-        <i class="hero-frase-aspas" data-lucide="quote" aria-hidden="true"></i>
-        <div class="hero-frase-caixa" role="text">${frasesHtml}</div>
-        <div class="hero-frase-dots" aria-hidden="true">${dotsHtml}</div>
-      </div>
+
+      <div class="hero-acoes animar-entrada">${acoesHtml}</div>
     </div>
+
     <a class="hero-scroll-cue animar-entrada" href="#links-rapidos" aria-label="Rolar até o conteúdo do site">
       <i data-lucide="chevron-down" aria-hidden="true"></i>
     </a>
-  `;
-
-  iniciarRotacaoFrases(container, hero.frases.length, hero.intervaloTrocaFraseMs);
-}
-
-/**
- * Faz a troca automática (cross-fade) entre as frases do Hero, com os
- * pontinhos abaixo acompanhando qual frase está ativa. Se o usuário
- * preferir menos movimento (prefers-reduced-motion), a rotação
- * automática não é iniciada — a primeira frase fica fixa na tela.
- */
-function iniciarRotacaoFrases(container, totalFrases, intervaloMs) {
-  if (totalFrases <= 1) return;
-
-  const prefereReduzirMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefereReduzirMovimento) return;
-
-  const frases = container.querySelectorAll('.hero-frase');
-  const dots = container.querySelectorAll('.hero-frase-dot');
-  let indiceAtual = 0;
-
-  setInterval(() => {
-    frases[indiceAtual].classList.remove('ativa');
-    dots[indiceAtual]?.classList.remove('ativa');
-    indiceAtual = (indiceAtual + 1) % totalFrases;
-    frases[indiceAtual].classList.add('ativa');
-    dots[indiceAtual]?.classList.add('ativa');
-  }, intervaloMs || 6000);
+  `
+  );
 }
 
 function renderLinksRapidos(dados, container) {
@@ -304,6 +325,8 @@ function renderLinksRapidos(dados, container) {
       <div class="link-rapido-grid">${cardsHtml}</div>
     </div>
   `;
+
+  escalonarEntrada(container, '.link-rapido-card');
 }
 
 function renderCertificacoes(dados, container) {
@@ -331,6 +354,8 @@ function renderCertificacoes(dados, container) {
       <div class="certificacao-grid">${cardsHtml}</div>
     </div>
   `;
+
+  escalonarEntrada(container, '.certificacao-card');
 }
 
 function renderPoliticas(dados, container) {
@@ -364,14 +389,19 @@ function renderPoliticas(dados, container) {
       <div class="politica-grid">${itensHtml}</div>
     </div>
   `;
+
+  escalonarEntrada(container, '.politica-card');
 }
 
 function render5S(dados, container) {
   const sensosHtml = dados.sensos
     .map(
-      (senso) => `
+      (senso, indice) => `
         <div class="cinco-s-card card animar-entrada">
-          <img class="cinco-s-icone" src="${senso.icone}" alt="Ícone do senso ${senso.nome}" loading="lazy">
+          <span class="cinco-s-numero">${indice + 1}º S</span>
+          <span class="cinco-s-icone-anel">
+            <img class="cinco-s-icone" src="${senso.icone}" alt="Ícone do senso ${senso.nome}" loading="lazy">
+          </span>
           <h3>${senso.nome}</h3>
           <p class="cinco-s-traducao">${senso.traducao}</p>
           <p class="cinco-s-descricao">${senso.descricao}</p>
@@ -383,24 +413,25 @@ function render5S(dados, container) {
   const linksHtml = dados.links
     .map(
       (item) => `
-        <a class="botao" href="${item.link}" target="_blank" rel="noopener">
+        <a class="botao botao--primario" href="${item.link}" target="_blank" rel="noopener">
           <i data-lucide="external-link" aria-hidden="true"></i>
-          ${item.rotulo}
+          <span>${item.rotulo}</span>
         </a>
       `
     )
     .join('');
 
+  // A imagem de banner do topo desta seção foi removida do layout —
+  // o campo "imagemPrincipal" do JSON não é mais usado.
   container.innerHTML = `
     <div class="container">
-      ${criarCabecalhoSecao(dados.tituloSecao)}
-      <div class="cinco-s-banner animar-entrada">
-        <img src="${dados.imagemPrincipal}" alt="Ilustração do Programa 5S" loading="lazy">
-      </div>
+      ${criarCabecalhoSecao(dados.tituloSecao, dados.descricaoSecao)}
       <div class="cinco-s-grid">${sensosHtml}</div>
       <div class="cinco-s-links">${linksHtml}</div>
     </div>
   `;
+
+  escalonarEntrada(container, '.cinco-s-card');
 }
 
 function renderCronograma(dados, container) {
@@ -479,6 +510,8 @@ function renderDocumentosPadrao(dados, container) {
       <div class="documento-grid">${itensHtml}</div>
     </div>
   `;
+
+  escalonarEntrada(container, '.documento-card');
 }
 
 const ICONES_POR_COR_SWOT = {
@@ -492,14 +525,23 @@ function renderSwot(dados, container) {
   const quadrantesHtml = dados.quadrantes
     .map((quadrante) => {
       const icone = ICONES_POR_COR_SWOT[quadrante.cor] || 'circle';
-      const itensHtml = quadrante.itens.map((item) => `<li>${item}</li>`).join('');
+      const origemHtml = quadrante.origem
+        ? `<span class="swot-origem">${quadrante.origem}</span>`
+        : '';
+      const descricaoHtml = quadrante.descricao
+        ? `<p class="swot-descricao">${quadrante.descricao}</p>`
+        : '';
+      const itensHtml = (quadrante.itens || []).map((item) => `<li>${item}</li>`).join('');
+
       return `
         <div class="swot-quadrante swot-${quadrante.cor} card animar-entrada">
           <div class="swot-cabecalho">
-            <i data-lucide="${icone}" aria-hidden="true"></i>
+            <span class="swot-icone"><i data-lucide="${icone}" aria-hidden="true"></i></span>
             <h3>${quadrante.tipo}</h3>
+            ${origemHtml}
           </div>
-          <ul class="swot-lista">${itensHtml}</ul>
+          ${descricaoHtml}
+          ${itensHtml ? `<ul class="swot-lista">${itensHtml}</ul>` : ''}
         </div>
       `;
     })
@@ -507,10 +549,12 @@ function renderSwot(dados, container) {
 
   container.innerHTML = `
     <div class="container">
-      ${criarCabecalhoSecao(dados.tituloSecao, null, { texto: 'Ver mapeamento completo', link: dados.linkMapeamentoCompleto })}
+      ${criarCabecalhoSecao(dados.tituloSecao, dados.descricaoSecao, { texto: 'Ver mapeamento completo', link: dados.linkMapeamentoCompleto })}
       <div class="swot-grid">${quadrantesHtml}</div>
     </div>
   `;
+
+  escalonarEntrada(container, '.swot-quadrante');
 }
 
 function renderOitoRegras(dados, container) {
@@ -568,6 +612,8 @@ function renderOitoRegras(dados, container) {
   container.querySelectorAll('.regra-cabecalho[aria-expanded]').forEach((botao) => {
     botao.addEventListener('click', () => alternarAccordionRegra(container, botao));
   });
+
+  escalonarEntrada(container, '.regra-card');
 }
 
 /**
@@ -590,27 +636,6 @@ function alternarAccordionRegra(container, botaoClicado) {
   }
 }
 
-function renderIndicadores(dados, container) {
-  container.innerHTML = `
-    <div class="container">
-      <div class="indicadores-placeholder card animar-entrada">
-        <span class="indicadores-icone">
-          <i data-lucide="bar-chart-3" aria-hidden="true"></i>
-        </span>
-        <div class="indicadores-titulo-linha">
-          <h2>${dados.tituloSecao}</h2>
-          <span class="indicadores-badge">Em breve</span>
-        </div>
-        <p>${dados.mensagem}</p>
-        <a class="botao" href="${dados.cta.ancora}">
-          <i data-lucide="arrow-right" aria-hidden="true"></i>
-          ${dados.cta.texto}
-        </a>
-      </div>
-    </div>
-  `;
-}
-
 /* -------------------------------------------------------------------------
    BLOCO 4 — Registro central das seções com fetch + inicializador isolado
    ------------------------------------------------------------------------- */
@@ -618,6 +643,9 @@ function renderIndicadores(dados, container) {
 // Cada entrada é uma seção de conteúdo carregada de forma independente:
 // se o JSON de uma falhar, só aquela seção mostra erro — as outras
 // continuam funcionando normalmente.
+// A seção "indicadores" foi removida por enquanto (volta na Fase 2):
+// para reativá-la, recrie a <section id="indicadores"> no index.html,
+// a função renderIndicadores() acima e a linha correspondente aqui.
 const SECOES = [
   { id: 'hero', arquivo: 'data/config.json', render: renderHero },
   { id: 'links-rapidos', arquivo: 'data/links-rapidos.json', render: renderLinksRapidos },
@@ -628,7 +656,6 @@ const SECOES = [
   { id: 'documentos-padrao', arquivo: 'data/documentos-padrao.json', render: renderDocumentosPadrao },
   { id: 'swot', arquivo: 'data/swot.json', render: renderSwot },
   { id: 'oito-regras', arquivo: 'data/oito-regras.json', render: renderOitoRegras },
-  { id: 'indicadores', arquivo: 'data/indicadores.json', render: renderIndicadores },
 ];
 
 async function inicializarSecao({ id, arquivo, render }) {
@@ -676,7 +703,7 @@ function inicializarAnimacoesScroll() {
         }
       });
     },
-    { threshold: 0.15 }
+    { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
   );
 }
 
