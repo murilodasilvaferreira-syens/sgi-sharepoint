@@ -782,6 +782,7 @@ section[id] {
 
 /* Trecho do título pintado com o degradê laranja */
 .hero-destaque {
+  display: block;
   background: var(--degrade-acento);
   -webkit-background-clip: text;
   background-clip: text;
