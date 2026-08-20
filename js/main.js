@@ -87,6 +87,8 @@ async function inicializarNavegacao() {
   const menuLista = document.getElementById('menu-nav');
   const textoRodape = document.getElementById('texto-rodape');
   const botaoToggle = document.getElementById('nav-toggle');
+  const backdrop = document.getElementById('nav-backdrop');
+  const navTopo = document.querySelector('.nav-topo');
 
   try {
     const config = await carregarJSON('data/config.json');
@@ -95,28 +97,129 @@ async function inicializarNavegacao() {
     textoRodape.textContent = config.site.textoRodape;
 
     menuLista.innerHTML = config.menu
-      .map((item) => `<li><a href="${item.ancora}">${item.rotulo}</a></li>`)
+      .map(
+        (item) => `
+          <li>
+            <a href="${item.ancora}" data-ancora="${item.ancora}">
+              <i data-lucide="${item.icone}" aria-hidden="true"></i>
+              <span>${item.rotulo}</span>
+            </a>
+          </li>
+        `
+      )
       .join('');
+    if (window.lucide) lucide.createIcons();
 
     // Fecha o menu mobile automaticamente ao clicar em um item
     menuLista.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => fecharMenuMobile());
     });
+
+    inicializarScrollSpy(config.menu.map((item) => item.ancora));
   } catch (erro) {
     console.error('Erro ao carregar navegação (data/config.json):', erro);
     // Falha na navegação não deve travar a página: menu fica vazio,
     // mas âncoras internas de cada seção continuam funcionando.
   }
 
+  function trocarIconeToggle(nomeIcone) {
+    // O Lucide substitui o <i data-lucide> original por um <svg> assim que
+    // createIcons() roda uma vez — por isso regeneramos o <i> do zero a
+    // cada troca, dentro de um wrapper estável (.nav-toggle-icone), em vez
+    // de tentar reaproveitar um elemento que pode já ter virado <svg>.
+    const wrapper = botaoToggle.querySelector('.nav-toggle-icone');
+    wrapper.innerHTML = `<i data-lucide="${nomeIcone}" aria-hidden="true"></i>`;
+    if (window.lucide) lucide.createIcons();
+  }
+
   function fecharMenuMobile() {
     menuLista.classList.remove('aberto');
+    backdrop.classList.remove('visivel');
     botaoToggle.setAttribute('aria-expanded', 'false');
+    trocarIconeToggle('menu');
+  }
+
+  function abrirMenuMobile() {
+    menuLista.classList.add('aberto');
+    backdrop.classList.add('visivel');
+    botaoToggle.setAttribute('aria-expanded', 'true');
+    trocarIconeToggle('x');
   }
 
   botaoToggle.addEventListener('click', () => {
-    const aberto = menuLista.classList.toggle('aberto');
-    botaoToggle.setAttribute('aria-expanded', String(aberto));
+    menuLista.classList.contains('aberto') ? fecharMenuMobile() : abrirMenuMobile();
   });
+
+  backdrop.addEventListener('click', fecharMenuMobile);
+
+  document.addEventListener('keydown', (evento) => {
+    if (evento.key === 'Escape') fecharMenuMobile();
+  });
+
+  // A navegação nasce "translúcida" sobre o Hero e só ganha fundo sólido +
+  // sombra depois que o usuário rola a página — efeito de vidro discreto,
+  // comum em produtos premium, sem nunca usar position:fixed (ver nota no
+  // topo do index.html sobre a restrição do embed em iframe).
+  window.addEventListener(
+    'scroll',
+    () => {
+      navTopo.classList.toggle('nav-topo--rolado', window.scrollY > 40);
+    },
+    { passive: true }
+  );
+}
+
+/**
+ * Destaca no menu o item correspondente à seção visível no momento
+ * ("scroll spy"). Recalcula a partir da posição real das seções a cada
+ * scroll — não usa IntersectionObserver aqui de propósito, porque as 10
+ * seções carregam seu conteúdo de forma assíncrona e em paralelo (cada
+ * uma faz seu próprio fetch), mudando de altura em momentos diferentes;
+ * um observer baseado em eventos de entrada/saída pode ficar "preso" num
+ * estado antigo por causa dessas mudanças de layout durante o carregamento.
+ */
+// Guarda a função de recálculo para poder chamá-la de novo depois que
+// TODAS as seções (cada uma com seu próprio fetch assíncrono) terminarem
+// de renderizar — ver o Promise.all no bloco de inicialização no fim
+// deste arquivo. O evento "load" da janela dispara cedo demais para
+// servir esse propósito: ele não espera os fetch() de /data terminarem.
+let atualizarScrollSpy = null;
+
+function inicializarScrollSpy(ancoras) {
+  const secoes = ancoras.map((ancora) => document.querySelector(ancora)).filter(Boolean);
+  if (secoes.length === 0) return;
+
+  function atualizarLinkAtivo() {
+    const linhaReferencia = window.innerHeight * 0.35;
+    let secaoAtiva = secoes[0];
+    for (const secao of secoes) {
+      if (secao.getBoundingClientRect().top <= linhaReferencia) {
+        secaoAtiva = secao;
+      }
+    }
+    const ancoraAtiva = `#${secaoAtiva.id}`;
+    document.querySelectorAll('#menu-nav a').forEach((link) => {
+      link.classList.toggle('ativo', link.getAttribute('data-ancora') === ancoraAtiva);
+    });
+  }
+
+  atualizarScrollSpy = atualizarLinkAtivo;
+
+  let frameAgendado = false;
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (frameAgendado) return;
+      frameAgendado = true;
+      requestAnimationFrame(() => {
+        atualizarLinkAtivo();
+        frameAgendado = false;
+      });
+    },
+    { passive: true }
+  );
+
+  atualizarLinkAtivo();
 }
 
 /* -------------------------------------------------------------------------
@@ -126,28 +229,41 @@ async function inicializarNavegacao() {
 
 function renderHero(config, container) {
   const hero = config.hero;
+  const unidadesTexto = hero.unidades.join(' · ');
 
   const frasesHtml = hero.frases
     .map((frase, indice) => `<p class="hero-frase${indice === 0 ? ' ativa' : ''}">${frase}</p>`)
     .join('');
 
+  const dotsHtml = hero.frases
+    .map((_, indice) => `<span class="hero-frase-dot${indice === 0 ? ' ativa' : ''}"></span>`)
+    .join('');
+
   container.innerHTML = `
     <div class="container hero-conteudo">
-      <img class="hero-logo animar-entrada" src="${hero.logo}" alt="${hero.logoAlt}" loading="lazy">
+      <div class="hero-eyebrow animar-entrada">
+        <i data-lucide="map-pin" aria-hidden="true"></i>
+        <span>${unidadesTexto}</span>
+      </div>
       <h1 class="animar-entrada">${hero.titulo}</h1>
-      <p class="hero-subtitulo animar-entrada">${hero.subtitulo}</p>
-      <div class="hero-frase-caixa animar-entrada" role="text">
-        ${frasesHtml}
+      <div class="hero-frase-card animar-entrada">
+        <i class="hero-frase-aspas" data-lucide="quote" aria-hidden="true"></i>
+        <div class="hero-frase-caixa" role="text">${frasesHtml}</div>
+        <div class="hero-frase-dots" aria-hidden="true">${dotsHtml}</div>
       </div>
     </div>
+    <a class="hero-scroll-cue animar-entrada" href="#links-rapidos" aria-label="Rolar até o conteúdo do site">
+      <i data-lucide="chevron-down" aria-hidden="true"></i>
+    </a>
   `;
 
   iniciarRotacaoFrases(container, hero.frases.length, hero.intervaloTrocaFraseMs);
 }
 
 /**
- * Faz a troca automática (cross-fade) entre as frases do Hero. Se o
- * usuário preferir menos movimento (prefers-reduced-motion), a rotação
+ * Faz a troca automática (cross-fade) entre as frases do Hero, com os
+ * pontinhos abaixo acompanhando qual frase está ativa. Se o usuário
+ * preferir menos movimento (prefers-reduced-motion), a rotação
  * automática não é iniciada — a primeira frase fica fixa na tela.
  */
 function iniciarRotacaoFrases(container, totalFrases, intervaloMs) {
@@ -157,12 +273,15 @@ function iniciarRotacaoFrases(container, totalFrases, intervaloMs) {
   if (prefereReduzirMovimento) return;
 
   const frases = container.querySelectorAll('.hero-frase');
+  const dots = container.querySelectorAll('.hero-frase-dot');
   let indiceAtual = 0;
 
   setInterval(() => {
     frases[indiceAtual].classList.remove('ativa');
+    dots[indiceAtual]?.classList.remove('ativa');
     indiceAtual = (indiceAtual + 1) % totalFrases;
     frases[indiceAtual].classList.add('ativa');
+    dots[indiceAtual]?.classList.add('ativa');
   }, intervaloMs || 6000);
 }
 
@@ -570,8 +689,13 @@ function observarAnimacoes(container) {
    INICIALIZAÇÃO
    ------------------------------------------------------------------------- */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   inicializarAnimacoesScroll(); // precisa existir antes das seções chamarem observarAnimacoes()
-  inicializarNavegacao();
-  SECOES.forEach(inicializarSecao);
+
+  // inicializarSecao() nunca rejeita (erros são capturados internamente),
+  // então o Promise.all sempre resolve — é só um jeito de saber quando
+  // todo mundo (Hero incluso) terminou de renderizar, para então calcular
+  // o estado inicial do "scroll spy" com as alturas reais, já assentadas.
+  await Promise.all([inicializarNavegacao(), ...SECOES.map(inicializarSecao)]);
+  atualizarScrollSpy?.();
 });

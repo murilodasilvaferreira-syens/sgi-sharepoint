@@ -36,7 +36,7 @@ cada arquivo:
 
 | Arquivo | O que controla |
 |---|---|
-| `data/config.json` | Textos da capa (Hero), frases que giram automaticamente, itens do menu de navegação e o texto do rodapé. |
+| `data/config.json` | Título e unidades exibidas na capa (Hero), frases que giram automaticamente, itens do menu de navegação (com ícone) e o texto do rodapé. |
 | `data/links-rapidos.json` | Os 5 cards de acesso rápido no topo (PDQ/NC, NC Fornecedor, etc). |
 | `data/certificacoes.json` | Os selos de certificação (ISO, HALAL, RSPO...) e os links de cada certificado. |
 | `data/politicas.json` | As políticas (Qualidade, HSE, Halal, Atuação Responsável). |
@@ -46,6 +46,26 @@ cada arquivo:
 | `data/swot.json` | Os 4 quadrantes da Matriz SWOT. |
 | `data/oito-regras.json` | As 8 Regras da Qualidade (resumo e texto completo de cada uma). |
 | `data/indicadores.json` | O texto da seção "Indicadores" (ainda em construção). |
+
+### Exemplo prático: a capa do site (`data/config.json`)
+
+```json
+"hero": {
+  "titulo": "Sistema de Gestão Integrado – SGI",
+  "unidades": ["Itatiba", "Taboão da Serra", "Paulínia"],
+  "frases": ["Frase 1", "Frase 2", "Frase 3"],
+  "intervaloTrocaFraseMs": 6000
+}
+```
+
+- `"unidades"` é a lista de unidades mostrada no selo pequeno acima do
+  título — para adicionar uma unidade nova, basta acrescentar um nome
+  na lista.
+- `"frases"` pode ter quantos itens quiser; eles alternam automaticamente
+  na tela a cada `"intervaloTrocaFraseMs"` milissegundos (6000 = 6 segundos).
+- Cada item de `"menu"` também tem um campo `"icone"` (nome de um ícone
+  de [lucide.dev/icons](https://lucide.dev/icons)), usado no menu do
+  celular — no computador o menu fica só com texto, sem ícones.
 
 ### Exemplo prático: adicionar um novo item de Link Rápido
 

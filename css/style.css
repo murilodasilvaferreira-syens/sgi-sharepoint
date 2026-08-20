@@ -248,7 +248,11 @@ section[id] {
   font-size: var(--fs-pequeno);
 }
 
-.erro-secao i {
+/* Seletor cobre "i" (fallback se o Lucide falhar ao carregar) e "svg"
+   (ícone já processado) — o Lucide substitui <i data-lucide> por <svg>,
+   perdendo qualquer regra CSS que mire só a tag <i>. */
+.erro-secao i,
+.erro-secao svg {
   flex-shrink: 0;
   width: 20px;
   height: 20px;
@@ -275,11 +279,23 @@ section[id] {
   top: 0;
   z-index: 100;
   height: var(--altura-nav);
-  background: var(--cor-branco);
-  border-bottom: 1px solid var(--cor-borda);
+  background: rgba(255, 253, 251, 0.7);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border-bottom: 1px solid transparent;
+  transition: background var(--transicao-padrao), border-color var(--transicao-padrao), box-shadow var(--transicao-padrao);
+}
+
+/* Ganha fundo sólido e sombra só depois que o usuário rola a página —
+   efeito de vidro discreto sobre o Hero (ver toggle em inicializarNavegacao). */
+.nav-topo--rolado {
+  background: rgba(255, 253, 251, 0.92);
+  border-bottom-color: var(--cor-borda);
+  box-shadow: 0 12px 24px -16px rgba(43, 43, 43, 0.18);
 }
 
 .nav-container {
+  position: relative;
   max-width: var(--largura-maxima);
   height: 100%;
   margin: 0 auto;
@@ -291,13 +307,17 @@ section[id] {
 
 .nav-marca {
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.35rem;
+  letter-spacing: 0.01em;
   color: var(--cor-texto);
+}
+
+.nav-marca-acento {
+  color: var(--cor-acento);
 }
 
 .nav-marca:hover {
   text-decoration: none;
-  color: var(--cor-acento);
 }
 
 .nav-toggle {
@@ -310,38 +330,89 @@ section[id] {
   padding: var(--espaco-xs);
 }
 
+.nav-toggle-icone {
+  display: flex;
+  width: 22px;
+  height: 22px;
+}
+
+/* ---- Menu (mobile = painel flutuante; vira barra horizontal no desktop) --- */
+
 .nav-menu {
   display: none;
   position: absolute;
-  top: var(--altura-nav);
-  left: 0;
-  right: 0;
+  top: 100%;
+  left: var(--espaco-md);
+  right: var(--espaco-md);
   flex-direction: column;
+  gap: 2px;
+  margin-top: var(--espaco-sm);
+  padding: var(--espaco-sm);
   background: var(--cor-branco);
-  border-bottom: 1px solid var(--cor-borda);
-  padding: var(--espaco-sm) var(--espaco-lg) var(--espaco-md);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+  box-shadow: var(--sombra-hover);
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity var(--transicao-padrao), transform var(--transicao-padrao);
 }
 
 .nav-menu.aberto {
   display: flex;
-  box-shadow: var(--sombra-hover);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .nav-menu li a {
-  display: block;
-  padding: var(--espaco-sm) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-sm);
+  padding: var(--espaco-sm) var(--espaco-md);
+  border-radius: var(--raio-sm);
   color: var(--cor-texto);
   font-weight: 600;
-  font-size: var(--fs-pequeno);
+  font-size: 0.95rem;
+  transition: background var(--transicao-padrao), color var(--transicao-padrao);
 }
 
-.nav-menu li a:hover {
+.nav-menu li a i,
+.nav-menu li a svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--cor-acento);
+}
+
+.nav-menu li a:hover,
+.nav-menu li a.ativo {
+  background: var(--cor-fundo-alt);
   color: var(--cor-acento);
   text-decoration: none;
 }
 
+/* Fundo escurecido atrás do painel mobile — clicar nele fecha o menu */
+.nav-backdrop {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background: rgba(43, 43, 43, 0.32);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transicao-padrao);
+}
+
+.nav-backdrop.visivel {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
 @media (min-width: 900px) {
-  .nav-toggle {
+  .nav-toggle,
+  .nav-backdrop {
     display: none;
   }
 
@@ -349,14 +420,51 @@ section[id] {
     display: flex;
     position: static;
     flex-direction: row;
-    gap: var(--espaco-lg);
+    align-items: center;
+    gap: var(--espaco-xl);
+    margin: 0;
+    padding: 0;
     background: none;
     border: none;
-    padding: 0;
+    box-shadow: none;
+    opacity: 1;
+    transform: none;
   }
 
   .nav-menu li a {
-    padding: 0;
+    position: relative;
+    padding: var(--espaco-sm) 0;
+    border-radius: 0;
+  }
+
+  /* Ícones existem só para o painel mobile — desktop fica limpo, sóbrio */
+  .nav-menu li a i,
+  .nav-menu li a svg {
+    display: none;
+  }
+
+  .nav-menu li a:hover,
+  .nav-menu li a.ativo {
+    background: none;
+  }
+
+  /* Indicador de item ativo/hover: traço desliza por baixo do texto */
+  .nav-menu li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 2px;
+    background: var(--cor-acento);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transicao-padrao);
+  }
+
+  .nav-menu li a:hover::after,
+  .nav-menu li a.ativo::after {
+    transform: scaleX(1);
   }
 }
 
@@ -378,11 +486,15 @@ section[id] {
 .secao-hero {
   position: relative;
   overflow: hidden;
-  padding: calc(var(--espaco-2xl) * 1.6) 0 var(--espaco-2xl);
+  padding: calc(var(--espaco-2xl) * 1.9) 0 calc(var(--espaco-2xl) * 1.3);
   text-align: center;
+  /* Grade de pontos bem sutil — textura de fundo comum em produtos
+     premium (Stripe, Linear), quase imperceptível, some nas bordas. */
+  background-image: radial-gradient(circle, rgba(43, 43, 43, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-/* Glow radial sutil atrás do título — dá profundidade sem virar bloco
+/* Glow radial atrás do título — dá profundidade sem virar bloco
    de cor chapada (referência de sofisticação: Linear, Stripe). */
 .secao-hero::before {
   content: '';
@@ -392,62 +504,153 @@ section[id] {
   width: 900px;
   height: 900px;
   transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(186, 79, 10, 0.10) 0%, rgba(186, 79, 10, 0) 70%);
+  background: radial-gradient(circle, rgba(186, 79, 10, 0.13) 0%, rgba(186, 79, 10, 0) 70%);
+  pointer-events: none;
+}
+
+/* Esmaece a grade de pontos nas bordas, mantendo o centro nítido —
+   sem isso, a textura fica uniforme demais e perde a sutileza. */
+.secao-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, var(--cor-fundo) 85%);
   pointer-events: none;
 }
 
 .hero-conteudo {
   position: relative;
+  z-index: 1;
   max-width: 720px;
 }
 
-.hero-logo {
-  height: 40px;
-  width: auto;
-  margin: 0 auto var(--espaco-xl);
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-xs);
+  margin: 0 auto var(--espaco-lg);
+  padding: 6px 16px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  background: var(--cor-branco);
+  color: var(--cor-texto-claro);
+  font-size: var(--fs-pequeno);
+  font-weight: 600;
+  box-shadow: var(--sombra-sutil);
+}
+
+.hero-eyebrow i,
+.hero-eyebrow svg {
+  width: 14px;
+  height: 14px;
+  color: var(--cor-acento);
 }
 
 .secao-hero h1 {
+  margin-bottom: var(--espaco-xl);
   font-size: var(--fs-hero);
   letter-spacing: -0.02em;
-  line-height: 1.1;
+  line-height: 1.08;
 }
 
-.hero-subtitulo {
-  font-size: 1.125rem;
-  color: var(--cor-texto-claro);
-  max-width: 480px;
+/* Frase rotativa tratada como um cartão flutuante de citação, em vez de
+   um bloco com traço lateral — mais integrado ao restante do layout,
+   que agora é centralizado do início ao fim. */
+.hero-frase-card {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
   margin: 0 auto;
+  padding: var(--espaco-xl) var(--espaco-xl) var(--espaco-lg);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(43, 43, 43, 0.07);
+  border-radius: var(--raio-lg);
+  box-shadow: var(--sombra-sutil);
 }
 
-/* Frases rotativas tratadas como citação editorial: traço lateral em
-   laranja + cross-fade entre elas. Altura mínima fixa evita que o
-   layout "pule" quando o texto de uma frase é mais curto que o de outra. */
+.hero-frase-aspas {
+  width: 26px;
+  height: 26px;
+  margin-bottom: var(--espaco-sm);
+  color: var(--cor-acento);
+  opacity: 0.45;
+}
+
 .hero-frase-caixa {
   position: relative;
   min-height: 4.75em;
-  max-width: 520px;
-  margin: var(--espaco-xl) auto 0;
-  text-align: left;
 }
 
 .hero-frase {
   position: absolute;
   inset: 0;
   margin: 0;
-  padding-left: var(--espaco-lg);
-  border-left: 3px solid var(--cor-acento);
-  display: flex;
-  align-items: center;
   font-size: 1.15rem;
   font-weight: 600;
   font-style: italic;
+  line-height: 1.4;
   opacity: 0;
   transition: opacity 700ms ease;
 }
 
 .hero-frase.ativa {
   opacity: 1;
+}
+
+.hero-frase-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: var(--espaco-md);
+}
+
+.hero-frase-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cor-borda);
+  transition: background var(--transicao-padrao), transform var(--transicao-padrao);
+}
+
+.hero-frase-dot.ativa {
+  background: var(--cor-acento);
+  transform: scale(1.3);
+}
+
+/* Convite discreto para rolar a página, com balanço suave (neutralizado
+   automaticamente pelo bloco global de prefers-reduced-motion). */
+.hero-scroll-cue {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin: var(--espaco-xl) auto 0;
+  border: 1px solid var(--cor-borda);
+  border-radius: 50%;
+  color: var(--cor-texto-claro);
+  animation: hero-scroll-cue-flutuar 2.2s ease-in-out infinite;
+}
+
+.hero-scroll-cue:hover {
+  color: var(--cor-acento);
+  border-color: var(--cor-acento);
+  text-decoration: none;
+}
+
+.hero-scroll-cue i,
+.hero-scroll-cue svg {
+  width: 16px;
+  height: 16px;
+}
+
+@keyframes hero-scroll-cue-flutuar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
 }
 
 @media (min-width: 640px) {
@@ -496,7 +699,8 @@ section[id] {
   object-fit: contain;
 }
 
-.link-rapido-icone i {
+.link-rapido-icone i,
+.link-rapido-icone svg {
   width: 24px;
   height: 24px;
 }
@@ -601,7 +805,8 @@ section[id] {
   color: var(--cor-acento);
 }
 
-.politica-icone i {
+.politica-icone i,
+.politica-icone svg {
   width: 22px;
   height: 22px;
 }
@@ -821,7 +1026,8 @@ section[id] {
   color: var(--cor-acento);
 }
 
-.documento-icone i {
+.documento-icone i,
+.documento-icone svg {
   width: 24px;
   height: 24px;
 }
@@ -902,7 +1108,8 @@ section[id] {
   margin: 0;
 }
 
-.swot-cabecalho i {
+.swot-cabecalho i,
+.swot-cabecalho svg {
   width: 22px;
   height: 22px;
 }
@@ -1095,7 +1302,8 @@ section[id] {
   color: var(--cor-acento);
 }
 
-.indicadores-icone i {
+.indicadores-icone i,
+.indicadores-icone svg {
   width: 32px;
   height: 32px;
 }

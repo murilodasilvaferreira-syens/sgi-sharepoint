@@ -1,5 +1,5 @@
 {
-  "_comentario": "Configurações gerais do site: título da aba do navegador, rodapé, itens do menu de navegação e o conteúdo da capa (Hero). Para adicionar um item ao menu, copie um bloco dentro de 'menu' e ajuste 'rotulo' (texto do link) e 'ancora' (para qual seção ele leva — sempre um # seguido do id da seção em index.html).",
+  "_comentario": "Configurações gerais do site: título da aba do navegador, rodapé, itens do menu de navegação e o conteúdo da capa (Hero). Para adicionar um item ao menu, copie um bloco dentro de 'menu' e ajuste 'rotulo' (texto do link), 'ancora' (para qual seção ele leva — sempre um # seguido do id da seção em index.html) e 'icone' (nome de um ícone de https://lucide.dev/icons, usado no menu do celular).",
 
   "site": {
     "tituloAba": "Portal SGI - Syensqo",
@@ -7,23 +7,21 @@
   },
 
   "menu": [
-    { "rotulo": "Início", "ancora": "#hero" },
-    { "rotulo": "Links Rápidos", "ancora": "#links-rapidos" },
-    { "rotulo": "Certificações", "ancora": "#certificacoes" },
-    { "rotulo": "Políticas", "ancora": "#politicas" },
-    { "rotulo": "5S", "ancora": "#secao-5s" },
-    { "rotulo": "Cronograma", "ancora": "#cronograma" },
-    { "rotulo": "Documentos Padrão", "ancora": "#documentos-padrao" },
-    { "rotulo": "SWOT", "ancora": "#swot" },
-    { "rotulo": "8 Regras", "ancora": "#oito-regras" },
-    { "rotulo": "Indicadores", "ancora": "#indicadores" }
+    { "rotulo": "Início", "ancora": "#hero", "icone": "home" },
+    { "rotulo": "Links Rápidos", "ancora": "#links-rapidos", "icone": "zap" },
+    { "rotulo": "Certificações", "ancora": "#certificacoes", "icone": "award" },
+    { "rotulo": "Políticas", "ancora": "#politicas", "icone": "file-text" },
+    { "rotulo": "5S", "ancora": "#secao-5s", "icone": "layout-grid" },
+    { "rotulo": "Cronograma", "ancora": "#cronograma", "icone": "calendar" },
+    { "rotulo": "Documentos Padrão", "ancora": "#documentos-padrao", "icone": "file-check-2" },
+    { "rotulo": "SWOT", "ancora": "#swot", "icone": "grid-2x2" },
+    { "rotulo": "8 Regras", "ancora": "#oito-regras", "icone": "shield-check" },
+    { "rotulo": "Indicadores", "ancora": "#indicadores", "icone": "bar-chart-3" }
   ],
 
   "hero": {
-    "logo": "imagens/LOGO_SYENSQO.jpeg",
-    "logoAlt": "Logotipo Syensqo",
     "titulo": "Sistema de Gestão Integrado – SGI",
-    "subtitulo": "Unindo as unidades Itatiba, Taboão da Serra e Paulínia",
+    "unidades": ["Itatiba", "Taboão da Serra", "Paulínia"],
     "frases": [
       "Qualidade não é um ato, é um hábito!",
       "Qualidade não é corrigir: é fazer certo na primeira vez!",
