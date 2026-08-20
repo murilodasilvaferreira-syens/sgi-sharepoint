@@ -19,7 +19,7 @@
   <!-- Google Fonts: Poppins (600/700 em títulos, 400 no corpo) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -33,10 +33,11 @@
        Fica "sticky" (gruda no topo ao rolar), nunca "fixed" — isso é
        necessário para funcionar corretamente dentro do iframe do
        SharePoint. Os itens do menu vêm de data/config.json (menu).
+       Não há marca/logo à esquerda: o menu é o único elemento, o que
+       deixa o cabeçalho mais limpo e dá espaço para os 9 itens.
        =================================================================== -->
   <header class="nav-topo">
     <nav class="nav-container" aria-label="Navegação principal">
-      <a href="#hero" class="nav-marca">SG<span class="nav-marca-acento">I</span></a>
 
       <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="menu-nav">
         <span class="sr-only">Abrir menu</span>
@@ -49,12 +50,23 @@
       <!-- Fundo escurecido atrás do painel de menu mobile, para fechar ao clicar fora -->
       <div class="nav-backdrop" id="nav-backdrop"></div>
     </nav>
+
+    <!-- Barra fina de progresso de leitura (largura controlada em main.js) -->
+    <div class="nav-progresso" id="nav-progresso" aria-hidden="true"></div>
   </header>
 
   <main id="conteudo-principal">
 
     <!-- 1. HERO -->
-    <section id="hero" class="secao secao-hero" aria-label="Apresentação"></section>
+    <section id="hero" class="secao secao-hero" aria-label="Apresentação">
+      <!-- Orbs laranja desfocadas: profundidade de fundo. São "absolute"
+           (nunca "fixed") para não escapar do iframe do SharePoint. -->
+      <div class="hero-orbs" aria-hidden="true">
+        <span class="hero-orb hero-orb-1"></span>
+        <span class="hero-orb hero-orb-2"></span>
+        <span class="hero-orb hero-orb-3"></span>
+      </div>
+    </section>
 
     <!-- 2. LINKS RÁPIDOS -->
     <section id="links-rapidos" class="secao secao-links-rapidos"></section>
@@ -80,8 +92,10 @@
     <!-- 9. OITO REGRAS DA QUALIDADE -->
     <section id="oito-regras" class="secao secao-oito-regras"></section>
 
-    <!-- 10. INDICADORES (placeholder "Em breve" até a Fase 2 do projeto) -->
-    <section id="indicadores" class="secao secao-indicadores"></section>
+    <!-- A seção "Indicadores" foi removida por enquanto; será reintroduzida
+         na Fase 2 do projeto. Para trazê-la de volta: recrie a <section
+         id="indicadores">, o item no "menu" de data/config.json e a
+         entrada correspondente em SECOES no js/main.js. -->
 
   </main>
 
