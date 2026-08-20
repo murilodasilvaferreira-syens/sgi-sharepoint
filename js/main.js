@@ -96,157 +96,19 @@ function escalonarEntrada(container, seletor) {
    BLOCO 2 — Navegação, título da aba e rodapé (a partir de data/config.json)
    ------------------------------------------------------------------------- */
 
-async function inicializarNavegacao() {
-  const menuLista = document.getElementById('menu-nav');
+async function inicializarCabecalho() {
   const textoRodape = document.getElementById('texto-rodape');
-  const botaoToggle = document.getElementById('nav-toggle');
-  const backdrop = document.getElementById('nav-backdrop');
-  const navTopo = document.querySelector('.nav-topo');
-  const barraProgresso = document.getElementById('nav-progresso');
 
   try {
     const config = await carregarJSON('data/config.json');
-
     document.title = config.site.tituloAba;
     textoRodape.textContent = config.site.textoRodape;
-
-    menuLista.innerHTML = config.menu
-      .map(
-        (item) => `
-          <li>
-            <a href="${item.ancora}" data-ancora="${item.ancora}">
-              <i data-lucide="${item.icone}" aria-hidden="true"></i>
-              <span>${item.rotulo}</span>
-            </a>
-          </li>
-        `
-      )
-      .join('');
-    if (window.lucide) lucide.createIcons();
-
-    // Fecha o menu mobile automaticamente ao clicar em um item
-    menuLista.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => fecharMenuMobile());
-    });
-
-    inicializarScrollSpy(config.menu.map((item) => item.ancora));
   } catch (erro) {
-    console.error('Erro ao carregar navegação (data/config.json):', erro);
-    // Falha na navegação não deve travar a página: menu fica vazio,
-    // mas âncoras internas de cada seção continuam funcionando.
+    console.error('Erro ao carregar config (data/config.json):', erro);
+    // Falha aqui não derruba a página: só o título da aba e o rodapé
+    // ficam com o valor padrão do index.html.
   }
-
-  function trocarIconeToggle(nomeIcone) {
-    // O Lucide substitui o <i data-lucide> original por um <svg> assim que
-    // createIcons() roda uma vez — por isso regeneramos o <i> do zero a
-    // cada troca, dentro de um wrapper estável (.nav-toggle-icone), em vez
-    // de tentar reaproveitar um elemento que pode já ter virado <svg>.
-    const wrapper = botaoToggle.querySelector('.nav-toggle-icone');
-    wrapper.innerHTML = `<i data-lucide="${nomeIcone}" aria-hidden="true"></i>`;
-    if (window.lucide) lucide.createIcons();
-  }
-
-  function fecharMenuMobile() {
-    menuLista.classList.remove('aberto');
-    backdrop.classList.remove('visivel');
-    botaoToggle.setAttribute('aria-expanded', 'false');
-    trocarIconeToggle('menu');
-  }
-
-  function abrirMenuMobile() {
-    menuLista.classList.add('aberto');
-    backdrop.classList.add('visivel');
-    botaoToggle.setAttribute('aria-expanded', 'true');
-    trocarIconeToggle('x');
-  }
-
-  botaoToggle.addEventListener('click', () => {
-    menuLista.classList.contains('aberto') ? fecharMenuMobile() : abrirMenuMobile();
-  });
-
-  backdrop.addEventListener('click', fecharMenuMobile);
-
-  document.addEventListener('keydown', (evento) => {
-    if (evento.key === 'Escape') fecharMenuMobile();
-  });
-
-  // A navegação nasce "translúcida" sobre o Hero e só ganha fundo sólido +
-  // sombra depois que o usuário rola a página — efeito de vidro discreto,
-  // comum em produtos premium, sem nunca usar position:fixed (ver nota no
-  // topo do index.html sobre a restrição do embed em iframe).
-  // No mesmo listener, atualizamos a barra fina de progresso de leitura.
-  window.addEventListener(
-    'scroll',
-    () => {
-      navTopo.classList.toggle('nav-topo--rolado', window.scrollY > 40);
-      atualizarBarraProgresso();
-    },
-    { passive: true }
-  );
-
-  function atualizarBarraProgresso() {
-    if (!barraProgresso) return;
-    const rolavel = document.documentElement.scrollHeight - window.innerHeight;
-    const percentual = rolavel > 0 ? (window.scrollY / rolavel) * 100 : 0;
-    barraProgresso.style.width = `${Math.min(100, Math.max(0, percentual))}%`;
-  }
-
-  atualizarBarraProgresso();
 }
-
-/**
- * Destaca no menu o item correspondente à seção visível no momento
- * ("scroll spy"). Recalcula a partir da posição real das seções a cada
- * scroll — não usa IntersectionObserver aqui de propósito, porque as
- * seções carregam seu conteúdo de forma assíncrona e em paralelo (cada
- * uma faz seu próprio fetch), mudando de altura em momentos diferentes;
- * um observer baseado em eventos de entrada/saída pode ficar "preso" num
- * estado antigo por causa dessas mudanças de layout durante o carregamento.
- */
-// Guarda a função de recálculo para poder chamá-la de novo depois que
-// TODAS as seções (cada uma com seu próprio fetch assíncrono) terminarem
-// de renderizar — ver o Promise.all no bloco de inicialização no fim
-// deste arquivo. O evento "load" da janela dispara cedo demais para
-// servir esse propósito: ele não espera os fetch() de /data terminarem.
-let atualizarScrollSpy = null;
-
-function inicializarScrollSpy(ancoras) {
-  const secoes = ancoras.map((ancora) => document.querySelector(ancora)).filter(Boolean);
-  if (secoes.length === 0) return;
-
-  function atualizarLinkAtivo() {
-    const linhaReferencia = window.innerHeight * 0.35;
-    let secaoAtiva = secoes[0];
-    for (const secao of secoes) {
-      if (secao.getBoundingClientRect().top <= linhaReferencia) {
-        secaoAtiva = secao;
-      }
-    }
-    const ancoraAtiva = `#${secaoAtiva.id}`;
-    document.querySelectorAll('#menu-nav a').forEach((link) => {
-      link.classList.toggle('ativo', link.getAttribute('data-ancora') === ancoraAtiva);
-    });
-  }
-
-  atualizarScrollSpy = atualizarLinkAtivo;
-
-  let frameAgendado = false;
-  window.addEventListener(
-    'scroll',
-    () => {
-      if (frameAgendado) return;
-      frameAgendado = true;
-      requestAnimationFrame(() => {
-        atualizarLinkAtivo();
-        frameAgendado = false;
-      });
-    },
-    { passive: true }
-  );
-
-  atualizarLinkAtivo();
-}
-
 /* -------------------------------------------------------------------------
    BLOCO 3 — Uma função renderX(dados, container) por seção de conteúdo.
    Cada seção nova implementada no projeto ganha sua função aqui.
@@ -719,10 +581,5 @@ function observarAnimacoes(container) {
 document.addEventListener('DOMContentLoaded', async () => {
   inicializarAnimacoesScroll(); // precisa existir antes das seções chamarem observarAnimacoes()
 
-  // inicializarSecao() nunca rejeita (erros são capturados internamente),
-  // então o Promise.all sempre resolve — é só um jeito de saber quando
-  // todo mundo (Hero incluso) terminou de renderizar, para então calcular
-  // o estado inicial do "scroll spy" com as alturas reais, já assentadas.
-  await Promise.all([inicializarNavegacao(), ...SECOES.map(inicializarSecao)]);
-  atualizarScrollSpy?.();
+  await Promise.all([inicializarCabecalho(), ...SECOES.map(inicializarSecao)]);
 });
