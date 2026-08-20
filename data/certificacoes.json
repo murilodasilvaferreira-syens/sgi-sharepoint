@@ -38,7 +38,7 @@
       "norma": "KOSHER",
       "imagem": "imagens/LOGO_Kosher.jpeg",
       "versoes": [
-        { "rotulo": "Taboão", "link": "https://syensqosa.sharepoint.com/sites/shdqhsescogbunovecare/Shared%20Documents/Forms/AllItems.aspx?viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3&as=json&id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FKosher%2F2%29%20Tabo%C3%A3o%2F2026%2FCertificado%20Kosher%20Tabo%C3%A3o%5FVenc%2E2027%2Epdf&parent=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FKosher%2F2%29%20Tabo%C3%A3o%2F2026" }
+        { "rotulo": "Taboão", "link": "https://syensqosa.sharepoint.com/sites/shdqhsescogbunovecare/Shared%20Documents/Forms/AllItems.aspx?viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3&as=json&id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FKosher%2F0%2ECertificado%20Kosher%5FTabo%C3%A3o%20da%20Serra%2F2026%2FCertificado%20Kosher%20Tabo%C3%A3o%5FVenc%2E2027%2Epdf&parent=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FKosher%2F0%2ECertificado%20Kosher%5FTabo%C3%A3o%20da%20Serra%2F2026" }
       ]
     },
     {
@@ -52,8 +52,8 @@
       "norma": "ISO 14001",
       "imagem": "imagens/LOGO_ISO.jpeg",
       "versoes": [
-        { "rotulo": "Taboão PT", "link": "https://syensqosa.sharepoint.com/sites/shdqhsescogbunovecare/Shared%20Documents/Forms/AllItems.aspx?sortField=LinkFilename&isAscending=true&viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3&FolderCTID=0x0120003190AAB4E897C540B4F4790C86C61254&or=WORD%2DWEB%2EBODY%2ENT&ct=1787136428278&id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FISO%20140011%2FTabo%C3%A3o%2FCertificado%20ISO14001%5FTabo%C3%A3o%20da%20Serra%5FVenc%2E2028%5FPT%2Epdf&parent=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FISO%20140011%2FTabo%C3%A3o" },
-        { "rotulo": "Taboão EN", "link": "https://syensqosa.sharepoint.com/sites/shdqhsescogbunovecare/Shared%20Documents/Forms/AllItems.aspx?sortField=LinkFilename&isAscending=true&viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3&FolderCTID=0x0120003190AAB4E897C540B4F4790C86C61254&or=WORD%2DWEB%2EBODY%2ENT&ct=1787136428278&id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FISO%20140011%2FTabo%C3%A3o%2FCertificate%20ISO14001%5FTabo%C3%A3o%20da%20Serra%5FVenc%2E2028%5FEN%2Epdf&parent=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FISO%20140011%2FTabo%C3%A3o" }
+        { "rotulo": "Taboão PT", "link": "https://syensqosa.sharepoint.com/sites/shdqhsescogbunovecare/Shared%20Documents/Forms/AllItems.aspx?viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3&as=json&id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FISO%2014001%2FTabo%C3%A3o%20da%20Serra%2FCertificado%20ISO14001%5FTabo%C3%A3o%20da%20Serra%5FVenc%2E2028%5FPT%2Epdf&parent=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FISO%2014001%2FTabo%C3%A3o%20da%20Serra" },
+        { "rotulo": "Taboão EN", "link": "https://syensqosa.sharepoint.com/sites/shdqhsescogbunovecare/Shared%20Documents/Forms/AllItems.aspx?viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3&as=json&id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FISO%2014001%2FTabo%C3%A3o%20da%20Serra%2FCertificate%20ISO14001%5FTabo%C3%A3o%20da%20Serra%5FVenc%2E2028%5FEN%2Epdf&parent=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FISO%2014001%2FTabo%C3%A3o%20da%20Serra" }
       ]
     }
   ]
