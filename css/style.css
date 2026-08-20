@@ -98,8 +98,11 @@ body {
   color: var(--cor-texto);
   background: var(--cor-fundo);
   line-height: 1.6;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  /* NÃO adicione "overflow-x: hidden" aqui: qualquer overflow diferente
+     de "visible" num ancestral cancela o position:sticky da .nav-topo,
+     e o menu para de grudar no topo ao rolar. O vazamento horizontal
+     das orbs já é contido pelo overflow:hidden do próprio .secao-hero. */
 }
 
 h1, h2, h3, h4 {
