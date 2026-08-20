@@ -1,0 +1,1167 @@
+/* =========================================================================
+   PORTAL DO SGI — Syensqo Brasil
+   Folha de estilos única. Organizada por seção, mobile-first.
+
+   PARA TROCAR A COR PRIMÁRIA DO SITE INTEIRO: edite só a variável
+   --cor-acento no bloco :root logo abaixo. Todo o resto do arquivo usa
+   essa variável, então uma única alteração já propaga para o site todo.
+   ========================================================================= */
+
+:root {
+  /* ---- Cores ------------------------------------------------------- */
+  /* Laranja Syensqo — usado como destaque pontual (botões, links, hover),
+     nunca como fundo de áreas grandes. O tom abaixo é calibrado para
+     manter contraste >= 4.5:1 (WCAG AA) tanto como texto quanto como
+     fundo de botão com texto branco, nos 3 fundos claros usados no site. */
+  --cor-acento: #BA4F0A;
+  --cor-acento-escuro: #953F08; /* tom mais escuro do acento, usado em :hover/:active */
+  --cor-fundo: #FFFDFB;         /* off-white — fundo geral do site */
+  --cor-fundo-alt: #F5F5F5;     /* cinza claro — fundo alternado entre seções */
+  --cor-texto: #2B2B2B;         /* grafite — texto principal */
+  --cor-texto-claro: #6B6B6B;   /* grafite mais claro — textos secundários */
+  --cor-branco: #FFFFFF;
+  --cor-borda: #E5E2DE;
+  --cor-erro: #B3261E;
+  --cor-erro-fundo: #FBEAE9;
+
+  /* Cores semânticas usadas no grid do SWOT (data/swot.json usa estes nomes) */
+  --cor-swot-verde: #2E7D32;
+  --cor-swot-vermelho: #C62828;
+  --cor-swot-azul: #1565C0;
+  --cor-swot-laranja: var(--cor-acento);
+
+  /* ---- Tipografia ---------------------------------------------------- */
+  --fonte-principal: 'Poppins', Arial, sans-serif;
+  --fs-hero: clamp(2.25rem, 5.5vw, 3.75rem);
+  --fs-h1: clamp(1.8rem, 4vw, 2.75rem);
+  --fs-h2: clamp(1.4rem, 3vw, 2rem);
+  --fs-h3: clamp(1.1rem, 2vw, 1.35rem);
+  --fs-corpo: 1rem;
+  --fs-pequeno: 0.875rem;
+
+  /* ---- Espaçamento (escala) ------------------------------------------ */
+  --espaco-xs: 0.25rem;
+  --espaco-sm: 0.5rem;
+  --espaco-md: 1rem;
+  --espaco-lg: 1.5rem;
+  --espaco-xl: 2.5rem;
+  --espaco-2xl: 4rem;
+
+  /* ---- Raios e sombras ------------------------------------------------ */
+  --raio-sm: 6px;
+  --raio-md: 12px;
+  --raio-lg: 20px;
+  --sombra-sutil: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --sombra-hover: 0 6px 20px rgba(0, 0, 0, 0.12);
+
+  /* ---- Layout ---------------------------------------------------------- */
+  --largura-maxima: 1200px;
+  --altura-nav: 64px;
+  --transicao-padrao: 200ms ease;
+}
+
+/* =========================================================================
+   RESET MÍNIMO E BASE
+   ========================================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte-principal);
+  font-size: var(--fs-corpo);
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--fonte-principal);
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 var(--espaco-md);
+}
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); font-weight: 600; }
+h3 { font-size: var(--fs-h3); font-weight: 600; }
+
+p {
+  margin: 0 0 var(--espaco-md);
+}
+
+a {
+  color: var(--cor-acento);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Todo mundo que precisa rolar até uma seção (menu, link âncora do card 5S)
+   fica com esse respiro no topo, para o título da seção não ficar escondido
+   atrás da navegação sticky. */
+section[id] {
+  scroll-margin-top: calc(var(--altura-nav) + var(--espaco-md));
+}
+
+/* ---- Acessibilidade -------------------------------------------------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.pular-conteudo {
+  position: absolute;
+  top: -100px;
+  left: var(--espaco-md);
+  background: var(--cor-acento);
+  color: var(--cor-branco);
+  padding: var(--espaco-sm) var(--espaco-md);
+  border-radius: var(--raio-sm);
+  z-index: 1000;
+  transition: top var(--transicao-padrao);
+}
+
+.pular-conteudo:focus {
+  top: var(--espaco-md);
+}
+
+:focus-visible {
+  outline: 3px solid var(--cor-acento);
+  outline-offset: 2px;
+}
+
+/* =========================================================================
+   UTILITÁRIOS GENÉRICOS (reaproveitados por várias seções em js/main.js)
+   ========================================================================= */
+
+.container {
+  width: 100%;
+  max-width: var(--largura-maxima);
+  margin: 0 auto;
+  padding: 0 var(--espaco-lg);
+}
+
+.titulo-secao {
+  text-align: center;
+  margin-bottom: var(--espaco-xl);
+}
+
+.titulo-secao p {
+  color: var(--cor-texto-claro);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--cor-branco);
+  border-radius: var(--raio-md);
+  box-shadow: var(--sombra-sutil);
+  transition: box-shadow var(--transicao-padrao), transform var(--transicao-padrao);
+}
+
+.card:hover {
+  box-shadow: var(--sombra-hover);
+  transform: translateY(-2px);
+}
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-sm);
+  background: var(--cor-acento);
+  color: var(--cor-branco);
+  border: none;
+  border-radius: var(--raio-sm);
+  padding: var(--espaco-sm) var(--espaco-lg);
+  font-weight: 600;
+  font-size: var(--fs-pequeno);
+  transition: background var(--transicao-padrao);
+}
+
+.botao:hover {
+  background: var(--cor-acento-escuro);
+  text-decoration: none;
+}
+
+.pill {
+  display: inline-block;
+  border: 1px solid var(--cor-acento);
+  color: var(--cor-acento);
+  border-radius: 999px;
+  padding: var(--espaco-xs) var(--espaco-md);
+  font-size: var(--fs-pequeno);
+  font-weight: 600;
+  transition: background var(--transicao-padrao), color var(--transicao-padrao);
+}
+
+.pill:hover {
+  background: var(--cor-acento);
+  color: var(--cor-branco);
+  text-decoration: none;
+}
+
+/* Mensagem discreta de erro, usada por exibirErroSecao() quando um JSON
+   falha ao carregar — o resto da página continua funcionando normalmente. */
+.erro-secao {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-sm);
+  max-width: var(--largura-maxima);
+  margin: 0 auto;
+  padding: var(--espaco-md) var(--espaco-lg);
+  background: var(--cor-erro-fundo);
+  color: var(--cor-erro);
+  border-radius: var(--raio-sm);
+  font-size: var(--fs-pequeno);
+}
+
+.erro-secao i {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+/* Animação de entrada usada pelo IntersectionObserver (inicializarAnimacoesScroll) */
+.animar-entrada {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.animar-entrada.visivel {
+  opacity: 1;
+  transform: none;
+}
+
+/* =========================================================================
+   NAVEGAÇÃO (sticky, nunca fixed — ver README.md sobre iframe/SharePoint)
+   ========================================================================= */
+
+.nav-topo {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--altura-nav);
+  background: var(--cor-branco);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.nav-container {
+  max-width: var(--largura-maxima);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 var(--espaco-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-marca {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--cor-texto);
+}
+
+.nav-marca:hover {
+  text-decoration: none;
+  color: var(--cor-acento);
+}
+
+.nav-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--cor-texto);
+  padding: var(--espaco-xs);
+}
+
+.nav-menu {
+  display: none;
+  position: absolute;
+  top: var(--altura-nav);
+  left: 0;
+  right: 0;
+  flex-direction: column;
+  background: var(--cor-branco);
+  border-bottom: 1px solid var(--cor-borda);
+  padding: var(--espaco-sm) var(--espaco-lg) var(--espaco-md);
+}
+
+.nav-menu.aberto {
+  display: flex;
+  box-shadow: var(--sombra-hover);
+}
+
+.nav-menu li a {
+  display: block;
+  padding: var(--espaco-sm) 0;
+  color: var(--cor-texto);
+  font-weight: 600;
+  font-size: var(--fs-pequeno);
+}
+
+.nav-menu li a:hover {
+  color: var(--cor-acento);
+  text-decoration: none;
+}
+
+@media (min-width: 900px) {
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-menu {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    gap: var(--espaco-lg);
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .nav-menu li a {
+    padding: 0;
+  }
+}
+
+/* =========================================================================
+   SEÇÕES — bloco genérico comum; regras específicas de cada seção são
+   adicionadas aqui conforme cada uma é implementada (ver plano do projeto).
+   ========================================================================= */
+
+.secao {
+  padding: var(--espaco-2xl) 0;
+}
+
+.secao:nth-of-type(even) {
+  background: var(--cor-fundo-alt);
+}
+
+/* ---- 1. HERO ----------------------------------------------------------- */
+
+.secao-hero {
+  position: relative;
+  overflow: hidden;
+  padding: calc(var(--espaco-2xl) * 1.6) 0 var(--espaco-2xl);
+  text-align: center;
+}
+
+/* Glow radial sutil atrás do título — dá profundidade sem virar bloco
+   de cor chapada (referência de sofisticação: Linear, Stripe). */
+.secao-hero::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  width: 900px;
+  height: 900px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(186, 79, 10, 0.10) 0%, rgba(186, 79, 10, 0) 70%);
+  pointer-events: none;
+}
+
+.hero-conteudo {
+  position: relative;
+  max-width: 720px;
+}
+
+.hero-logo {
+  height: 40px;
+  width: auto;
+  margin: 0 auto var(--espaco-xl);
+}
+
+.secao-hero h1 {
+  font-size: var(--fs-hero);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.hero-subtitulo {
+  font-size: 1.125rem;
+  color: var(--cor-texto-claro);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Frases rotativas tratadas como citação editorial: traço lateral em
+   laranja + cross-fade entre elas. Altura mínima fixa evita que o
+   layout "pule" quando o texto de uma frase é mais curto que o de outra. */
+.hero-frase-caixa {
+  position: relative;
+  min-height: 4.75em;
+  max-width: 520px;
+  margin: var(--espaco-xl) auto 0;
+  text-align: left;
+}
+
+.hero-frase {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding-left: var(--espaco-lg);
+  border-left: 3px solid var(--cor-acento);
+  display: flex;
+  align-items: center;
+  font-size: 1.15rem;
+  font-weight: 600;
+  font-style: italic;
+  opacity: 0;
+  transition: opacity 700ms ease;
+}
+
+.hero-frase.ativa {
+  opacity: 1;
+}
+
+@media (min-width: 640px) {
+  .hero-frase-caixa {
+    min-height: 3em;
+  }
+}
+
+/* ---- 2. LINKS RÁPIDOS --------------------------------------------------- */
+
+.link-rapido-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--espaco-md);
+}
+
+.link-rapido-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-md);
+  padding: var(--espaco-lg);
+  overflow: hidden;
+  color: var(--cor-texto);
+}
+
+.link-rapido-card:hover {
+  text-decoration: none;
+}
+
+.link-rapido-icone {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--raio-sm);
+  background: var(--cor-fundo-alt);
+  color: var(--cor-acento);
+}
+
+.link-rapido-icone img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.link-rapido-icone i {
+  width: 24px;
+  height: 24px;
+}
+
+.link-rapido-titulo {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Seta que "desliza" para a posição no hover — indica link externo sem
+   precisar de texto extra, microinteração discreta. */
+.link-rapido-seta {
+  position: absolute;
+  top: var(--espaco-md);
+  right: var(--espaco-md);
+  width: 16px;
+  height: 16px;
+  color: var(--cor-texto-claro);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: opacity var(--transicao-padrao), transform var(--transicao-padrao), color var(--transicao-padrao);
+}
+
+.link-rapido-card:hover .link-rapido-seta {
+  opacity: 1;
+  transform: translate(0, 0);
+  color: var(--cor-acento);
+}
+
+/* ---- 3. CERTIFICAÇÕES --------------------------------------------------- */
+
+.certificacao-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--espaco-lg);
+}
+
+.certificacao-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espaco-xs);
+  padding: var(--espaco-xl) var(--espaco-lg);
+  text-align: center;
+}
+
+.certificacao-imagem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 72px;
+  margin-bottom: var(--espaco-sm);
+}
+
+.certificacao-imagem img {
+  max-height: 72px;
+  max-width: 140px;
+  object-fit: contain;
+}
+
+.certificacao-card h3 {
+  margin-bottom: var(--espaco-xs);
+}
+
+.certificacao-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--espaco-xs);
+}
+
+/* ---- 4. POLÍTICAS -------------------------------------------------------- */
+
+.politica-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--espaco-lg);
+  align-items: start;
+}
+
+.politica-card {
+  position: relative;
+  padding: var(--espaco-lg);
+  overflow: hidden;
+}
+
+.politica-cabecalho {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-md);
+}
+
+.politica-icone {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--raio-sm);
+  background: var(--cor-fundo-alt);
+  color: var(--cor-acento);
+}
+
+.politica-icone i {
+  width: 22px;
+  height: 22px;
+}
+
+.politica-titulo-link {
+  flex: 1;
+  font-weight: 600;
+  color: var(--cor-texto);
+}
+
+.politica-titulo-link:hover {
+  color: var(--cor-acento);
+  text-decoration: none;
+}
+
+.politica-seta {
+  position: absolute;
+  top: var(--espaco-md);
+  right: var(--espaco-md);
+  width: 16px;
+  height: 16px;
+  color: var(--cor-texto-claro);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: opacity var(--transicao-padrao), transform var(--transicao-padrao), color var(--transicao-padrao);
+}
+
+.politica-card:hover .politica-seta {
+  opacity: 1;
+  transform: translate(0, 0);
+  color: var(--cor-acento);
+}
+
+.politica-subitens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-xs);
+  margin-top: var(--espaco-md);
+  padding-top: var(--espaco-md);
+  border-top: 1px solid var(--cor-borda);
+}
+
+/* ---- 5. PROGRAMA 5S ------------------------------------------------------ */
+
+.cinco-s-banner {
+  overflow: hidden;
+  margin-bottom: var(--espaco-xl);
+  border-radius: var(--raio-lg);
+  box-shadow: var(--sombra-sutil);
+}
+
+.cinco-s-banner img {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+}
+
+.cinco-s-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--espaco-lg);
+  margin-bottom: var(--espaco-xl);
+}
+
+.cinco-s-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--espaco-lg) var(--espaco-md);
+  text-align: center;
+}
+
+.cinco-s-icone {
+  width: 88px;
+  height: 88px;
+  margin-bottom: var(--espaco-md);
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: var(--sombra-sutil);
+}
+
+.cinco-s-card h3 {
+  margin-bottom: 0;
+  letter-spacing: 0.03em;
+}
+
+.cinco-s-traducao {
+  margin: 0 0 var(--espaco-sm);
+  color: var(--cor-acento);
+  font-weight: 600;
+  font-size: var(--fs-pequeno);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cinco-s-descricao {
+  margin: 0;
+  color: var(--cor-texto-claro);
+  font-size: var(--fs-pequeno);
+}
+
+.cinco-s-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--espaco-md);
+}
+
+/* ---- 6. CRONOGRAMA DE AUDITORIA (FullCalendar) --------------------------- */
+
+.cronograma-legenda {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--espaco-lg);
+  margin-bottom: var(--espaco-lg);
+  color: var(--cor-texto-claro);
+  font-size: var(--fs-pequeno);
+}
+
+.cronograma-legenda-item {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-xs);
+}
+
+.cronograma-legenda-cor {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.cronograma-calendario-wrapper {
+  padding: var(--espaco-lg);
+  overflow-x: auto;
+}
+
+/* Sobrescreve as variáveis de tema do FullCalendar para combinar com a
+   identidade visual do site (cores, fonte) sem precisar de CSS customizado
+   ícone por ícone dentro da biblioteca. */
+.cronograma-calendario-wrapper .fc {
+  --fc-border-color: var(--cor-borda);
+  --fc-button-bg-color: var(--cor-acento);
+  --fc-button-border-color: var(--cor-acento);
+  --fc-button-hover-bg-color: var(--cor-acento-escuro);
+  --fc-button-hover-border-color: var(--cor-acento-escuro);
+  --fc-button-active-bg-color: var(--cor-acento-escuro);
+  --fc-today-bg-color: rgba(186, 79, 10, 0.08);
+  --fc-page-bg-color: transparent;
+  font-family: var(--fonte-principal);
+  font-size: var(--fs-pequeno);
+}
+
+.cronograma-calendario-wrapper .fc-toolbar-title {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+}
+
+.cronograma-calendario-wrapper .fc-button {
+  font-weight: 600;
+  text-transform: capitalize;
+  box-shadow: none !important;
+}
+
+.cronograma-calendario-wrapper .fc-daygrid-event {
+  border-radius: var(--raio-sm);
+  padding: 1px 4px;
+}
+
+/* Em telas estreitas, os 3 grupos da barra de ferramentas do FullCalendar
+   (navegação, título, seletor de view) não cabem numa linha só — empilha
+   e centraliza cada grupo em vez de deixar o padrão da lib quebrar torto. */
+@media (max-width: 640px) {
+  .cronograma-calendario-wrapper .fc-header-toolbar {
+    flex-direction: column;
+    gap: var(--espaco-sm);
+  }
+
+  .cronograma-calendario-wrapper .fc-toolbar-chunk {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* ---- 7. DOCUMENTOS PADRÃO ------------------------------------------------ */
+
+.documento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--espaco-md);
+}
+
+.documento-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-md);
+  padding: var(--espaco-lg);
+  overflow: hidden;
+  color: var(--cor-texto);
+}
+
+.documento-card:hover {
+  text-decoration: none;
+}
+
+.documento-icone {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--raio-sm);
+  background: var(--cor-fundo-alt);
+  color: var(--cor-acento);
+}
+
+.documento-icone i {
+  width: 24px;
+  height: 24px;
+}
+
+.documento-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.documento-codigo {
+  font-size: var(--fs-pequeno);
+  font-weight: 700;
+  color: var(--cor-acento);
+  letter-spacing: 0.02em;
+}
+
+.documento-titulo {
+  font-weight: 600;
+}
+
+.documento-seta {
+  position: absolute;
+  top: var(--espaco-md);
+  right: var(--espaco-md);
+  width: 16px;
+  height: 16px;
+  color: var(--cor-texto-claro);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: opacity var(--transicao-padrao), transform var(--transicao-padrao), color var(--transicao-padrao);
+}
+
+.documento-card:hover .documento-seta {
+  opacity: 1;
+  transform: translate(0, 0);
+  color: var(--cor-acento);
+}
+
+/* ---- 8. SWOT -------------------------------------------------------------- */
+
+.swot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--espaco-lg);
+}
+
+@media (max-width: 640px) {
+  .swot-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Entrada escalonada: cada quadrante aparece um pouco depois do anterior. */
+.swot-grid .animar-entrada:nth-child(1) { transition-delay: 0ms; }
+.swot-grid .animar-entrada:nth-child(2) { transition-delay: 100ms; }
+.swot-grid .animar-entrada:nth-child(3) { transition-delay: 200ms; }
+.swot-grid .animar-entrada:nth-child(4) { transition-delay: 300ms; }
+
+.swot-quadrante {
+  padding: var(--espaco-lg);
+  border-left: 4px solid transparent;
+}
+
+.swot-verde { border-left-color: var(--cor-swot-verde); }
+.swot-vermelho { border-left-color: var(--cor-swot-vermelho); }
+.swot-azul { border-left-color: var(--cor-swot-azul); }
+.swot-laranja { border-left-color: var(--cor-swot-laranja); }
+
+.swot-cabecalho {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-sm);
+  margin-bottom: var(--espaco-md);
+}
+
+.swot-cabecalho h3 {
+  margin: 0;
+}
+
+.swot-cabecalho i {
+  width: 22px;
+  height: 22px;
+}
+
+.swot-verde .swot-cabecalho { color: var(--cor-swot-verde); }
+.swot-vermelho .swot-cabecalho { color: var(--cor-swot-vermelho); }
+.swot-azul .swot-cabecalho { color: var(--cor-swot-azul); }
+.swot-laranja .swot-cabecalho { color: var(--cor-swot-laranja); }
+
+.swot-verde .swot-cabecalho h3 { color: var(--cor-swot-verde); }
+.swot-vermelho .swot-cabecalho h3 { color: var(--cor-swot-vermelho); }
+.swot-azul .swot-cabecalho h3 { color: var(--cor-swot-azul); }
+.swot-laranja .swot-cabecalho h3 { color: var(--cor-swot-laranja); }
+
+.swot-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-sm);
+}
+
+.swot-lista li {
+  position: relative;
+  padding-left: var(--espaco-md);
+  color: var(--cor-texto-claro);
+  font-size: var(--fs-pequeno);
+}
+
+.swot-lista li::before {
+  content: '';
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--cor-texto-claro);
+}
+
+.swot-verde .swot-lista li::before { background: var(--cor-swot-verde); }
+.swot-vermelho .swot-lista li::before { background: var(--cor-swot-vermelho); }
+.swot-azul .swot-lista li::before { background: var(--cor-swot-azul); }
+.swot-laranja .swot-lista li::before { background: var(--cor-swot-laranja); }
+
+/* ---- 9. OITO REGRAS DA QUALIDADE ------------------------------------------ */
+
+.regra-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-md);
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.regra-card {
+  padding: 0;
+}
+
+.regra-cabecalho {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espaco-md);
+  width: 100%;
+  padding: var(--espaco-lg);
+  background: none;
+  border: none;
+  color: var(--cor-texto);
+  text-align: left;
+  font-family: inherit;
+}
+
+.regra-numero {
+  flex-shrink: 0;
+  width: 2.5rem;
+  color: var(--cor-acento);
+  opacity: 0.3;
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.regra-titulo-bloco {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 4px;
+}
+
+.regra-titulo-linha {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-sm);
+}
+
+.regra-icone {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--cor-acento);
+}
+
+.regra-titulo {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.regra-resumo {
+  color: var(--cor-texto-claro);
+  font-size: var(--fs-pequeno);
+}
+
+.regra-chevron,
+.regra-seta-ancora {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 8px;
+  color: var(--cor-texto-claro);
+  transition: transform var(--transicao-padrao), color var(--transicao-padrao);
+}
+
+.regra-card.aberto .regra-chevron {
+  color: var(--cor-acento);
+  transform: rotate(180deg);
+}
+
+.regra-ancora .regra-cabecalho:hover .regra-seta-ancora {
+  color: var(--cor-acento);
+  transform: translateX(3px);
+}
+
+/* Animação de altura suave sem precisar medir scrollHeight via JS:
+   o container de 0fr para 1fr faz a transição, e o "inner" com
+   overflow:hidden garante que o texto não vaze durante a animação. */
+.regra-conteudo {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 350ms ease;
+}
+
+.regra-card.aberto .regra-conteudo {
+  grid-template-rows: 1fr;
+}
+
+.regra-conteudo-inner {
+  overflow: hidden;
+}
+
+.regra-conteudo-texto {
+  margin: 0;
+  padding: 0 var(--espaco-lg) var(--espaco-lg) calc(var(--espaco-lg) + 2.5rem + var(--espaco-md));
+  color: var(--cor-texto-claro);
+  font-size: var(--fs-pequeno);
+}
+
+@media (max-width: 640px) {
+  .regra-numero {
+    width: 1.8rem;
+    font-size: 1.75rem;
+  }
+
+  .regra-conteudo-texto {
+    padding-left: var(--espaco-lg);
+  }
+}
+
+/* ---- 10. INDICADORES (placeholder até a Fase 2) --------------------------- */
+
+.indicadores-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espaco-sm);
+  max-width: 560px;
+  margin: 0 auto;
+  padding: var(--espaco-2xl) var(--espaco-xl);
+  text-align: center;
+}
+
+.indicadores-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  margin-bottom: var(--espaco-sm);
+  border-radius: 50%;
+  background: var(--cor-fundo-alt);
+  color: var(--cor-acento);
+}
+
+.indicadores-icone i {
+  width: 32px;
+  height: 32px;
+}
+
+.indicadores-titulo-linha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-sm);
+}
+
+.indicadores-titulo-linha h2 {
+  margin: 0;
+}
+
+.indicadores-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: rgba(186, 79, 10, 0.12);
+  color: var(--cor-acento);
+  font-size: var(--fs-pequeno);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.indicadores-placeholder p {
+  color: var(--cor-texto-claro);
+  margin: var(--espaco-sm) 0 var(--espaco-md);
+}
+
+/* =========================================================================
+   RODAPÉ
+   ========================================================================= */
+
+.rodape {
+  padding: var(--espaco-lg);
+  text-align: center;
+  color: var(--cor-texto-claro);
+  font-size: var(--fs-pequeno);
+  border-top: 1px solid var(--cor-borda);
+}
+
+/* =========================================================================
+   ACESSIBILIDADE DE MOVIMENTO
+   Desliga animações e scroll suave para quem configurou o SO/navegador
+   para reduzir movimento.
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animar-entrada {
+    opacity: 1;
+    transform: none;
+  }
+}

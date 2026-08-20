@@ -1,0 +1,44 @@
+{
+  "_comentario": "Cronograma de auditorias exibido no calendário. IMPORTANTE sobre 'dataFim': ela é EXCLUSIVA — para um evento que termina no dia 16, 'dataFim' precisa ser o dia SEGUINTE (17), senão o calendário mostra um dia a menos. Para eventos de um único dia, 'dataFim' também é o dia seguinte ao 'dataInicio'. 'tipo' de cada evento precisa ser exatamente um dos nomes definidos em 'tiposAuditoria' (senão o evento aparece sem cor). Exemplo para adicionar um evento: { \"titulo\": \"Minha Auditoria\", \"dataInicio\": \"2026-12-01\", \"dataFim\": \"2026-12-02\", \"tipo\": \"Interna\", \"unidade\": \"Itatiba\" }",
+
+  "tituloSecao": "Cronograma de Auditoria",
+
+  "linkPlanilhaCompleta": "https://syensqosa.sharepoint.com/:x:/r/sites/shdqhsescogbunovecare/_layouts/15/Doc.aspx?sourcedoc=%7B66BE78FC-5305-47BC-8984-A198CB593BE3%7D&file=Calend%C3%A1rio%20de%20auditorias%20.xlsx&action=default&mobileredirect=true",
+
+  "tiposAuditoria": [
+    { "tipo": "Interna", "cor": "#1A4D8F" },
+    { "tipo": "Externa", "cor": "#E8630C" },
+    { "tipo": "Certificação", "cor": "#0F9D58" }
+  ],
+
+  "eventos": [
+    {
+      "titulo": "Auditoria Interna - Itatiba",
+      "dataInicio": "2026-09-15",
+      "dataFim": "2026-09-17",
+      "tipo": "Interna",
+      "unidade": "Itatiba"
+    },
+    {
+      "titulo": "Auditoria Externa ISO 9001 - Multisite",
+      "dataInicio": "2026-10-05",
+      "dataFim": "2026-10-06",
+      "tipo": "Externa",
+      "unidade": "Itatiba e Taboão"
+    },
+    {
+      "titulo": "Auditoria de Certificação RSPO",
+      "dataInicio": "2026-10-20",
+      "dataFim": "2026-10-22",
+      "tipo": "Certificação",
+      "unidade": "Itatiba e Taboão"
+    },
+    {
+      "titulo": "Auditoria Interna - Taboão",
+      "dataInicio": "2026-11-03",
+      "dataFim": "2026-11-04",
+      "tipo": "Interna",
+      "unidade": "Taboão"
+    }
+  ]
+}

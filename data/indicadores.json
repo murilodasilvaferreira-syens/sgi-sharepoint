@@ -1,0 +1,12 @@
+{
+  "_comentario": "Seção placeholder até a Fase 2 do projeto, quando os gráficos de indicadores (alimentados via Power Automate) forem implementados. 'cta.ancora' é um link interno do próprio site (aponta para outra seção enquanto os indicadores não existem) — mantenha o formato #id-da-secao.",
+
+  "tituloSecao": "Indicadores",
+
+  "mensagem": "Em breve, esta seção vai trazer indicadores visuais para acompanhar a performance do SGI em tempo real, atualizados automaticamente.",
+
+  "cta": {
+    "texto": "Ver Boletim da Qualidade",
+    "ancora": "#links-rapidos"
+  }
+}

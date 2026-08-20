@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!-- =====================================================================
+     PORTAL DO SGI — Sistema de Gestão Integrado (Syensqo Brasil)
+     Este arquivo só contém a ESTRUTURA da página. Nenhum texto, link
+     ou imagem de conteúdo fica aqui: tudo é lido dos arquivos JSON em
+     /data e injetado pelo js/main.js. Para trocar textos ou links,
+     edite os JSONs — nunca este arquivo. Veja o README.md.
+     ===================================================================== -->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Página interna: nunca deve ser indexada por buscadores -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <title>Portal SGI - Syensqo</title>
+
+  <!-- Google Fonts: Poppins (600/700 em títulos, 400 no corpo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Link de acessibilidade: permite pular a navegação usando o teclado -->
+  <a class="pular-conteudo" href="#conteudo-principal">Pular para o conteúdo</a>
+
+  <!-- ===================================================================
+       NAVEGAÇÃO
+       Fica "sticky" (gruda no topo ao rolar), nunca "fixed" — isso é
+       necessário para funcionar corretamente dentro do iframe do
+       SharePoint. Os itens do menu vêm de data/config.json (menu).
+       =================================================================== -->
+  <header class="nav-topo">
+    <nav class="nav-container" aria-label="Navegação principal">
+      <a href="#hero" class="nav-marca">SGI</a>
+
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="menu-nav">
+        <span class="sr-only">Abrir menu</span>
+        <i data-lucide="menu" aria-hidden="true"></i>
+      </button>
+
+      <!-- Preenchido dinamicamente por js/main.js a partir de config.json -->
+      <ul class="nav-menu" id="menu-nav"></ul>
+    </nav>
+  </header>
+
+  <main id="conteudo-principal">
+
+    <!-- 1. HERO -->
+    <section id="hero" class="secao secao-hero" aria-label="Apresentação"></section>
+
+    <!-- 2. LINKS RÁPIDOS -->
+    <section id="links-rapidos" class="secao secao-links-rapidos"></section>
+
+    <!-- 3. CERTIFICAÇÕES -->
+    <section id="certificacoes" class="secao secao-certificacoes"></section>
+
+    <!-- 4. POLÍTICAS -->
+    <section id="politicas" class="secao secao-politicas"></section>
+
+    <!-- 5. 5S (id não pode começar com número, por isso "secao-5s") -->
+    <section id="secao-5s" class="secao secao-5s"></section>
+
+    <!-- 6. CRONOGRAMA DE AUDITORIA -->
+    <section id="cronograma" class="secao secao-cronograma"></section>
+
+    <!-- 7. DOCUMENTOS PADRÃO -->
+    <section id="documentos-padrao" class="secao secao-documentos-padrao"></section>
+
+    <!-- 8. SWOT -->
+    <section id="swot" class="secao secao-swot"></section>
+
+    <!-- 9. OITO REGRAS DA QUALIDADE -->
+    <section id="oito-regras" class="secao secao-oito-regras"></section>
+
+    <!-- 10. INDICADORES (placeholder "Em breve" até a Fase 2 do projeto) -->
+    <section id="indicadores" class="secao secao-indicadores"></section>
+
+  </main>
+
+  <footer class="rodape">
+    <p id="texto-rodape"></p>
+  </footer>
+
+  <!-- ===================================================================
+       BIBLIOTECAS EXTERNAS (CDN)
+       Versões fixas de propósito: um site sem manutenção técnica não
+       pode quebrar silenciosamente porque uma lib externa mudou de
+       versão. Para atualizar, troque o número da versão aqui.
+       =================================================================== -->
+  <script src="https://unpkg.com/lucide@1.33.0/dist/umd/lucide.js" defer></script>
+  <!-- O bundle "global" do FullCalendar já inclui todos os locales (inclusive
+       pt-br) embutidos — não existe um arquivo de locale separado para baixar. -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.21/index.global.min.js" defer></script>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

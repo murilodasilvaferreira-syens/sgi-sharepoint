@@ -1,0 +1,42 @@
+{
+  "_comentario": "Conteúdo da matriz SWOT. Cada quadrante tem uma 'cor' — use apenas uma destas 4 palavras: \"verde\", \"vermelho\", \"azul\" ou \"laranja\". 'itens' é a lista de pontos daquele quadrante (ainda são só placeholders — substitua pelo conteúdo real). Exemplo para adicionar um item a um quadrante: adicione uma linha em \"itens\": [ ..., \"Meu novo ponto\" ]",
+
+  "tituloSecao": "Matriz SWOT",
+
+  "linkMapeamentoCompleto": "https://syensqosa.sharepoint.com/:x:/r/sites/shdqhsescogbunovecare/_layouts/15/Doc.aspx?sourcedoc=%7B2C0E4367-5E1C-48A7-B3FA-9F0D128894A5%7D&file=Mapeamento%20de%20Processo_Itatiba%20e%20Tabo%C3%A3o.xlsx&action=default&mobileredirect=true",
+
+  "quadrantes": [
+    {
+      "tipo": "Forças",
+      "cor": "verde",
+      "itens": [
+        "Placeholder — preencher com um ponto forte",
+        "Placeholder — preencher com um ponto forte"
+      ]
+    },
+    {
+      "tipo": "Fraquezas",
+      "cor": "vermelho",
+      "itens": [
+        "Placeholder — preencher com um ponto fraco",
+        "Placeholder — preencher com um ponto fraco"
+      ]
+    },
+    {
+      "tipo": "Oportunidades",
+      "cor": "azul",
+      "itens": [
+        "Placeholder — preencher com uma oportunidade",
+        "Placeholder — preencher com uma oportunidade"
+      ]
+    },
+    {
+      "tipo": "Ameaças",
+      "cor": "laranja",
+      "itens": [
+        "Placeholder — preencher com uma ameaça",
+        "Placeholder — preencher com uma ameaça"
+      ]
+    }
+  ]
+}

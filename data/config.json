@@ -1,0 +1,34 @@
+{
+  "_comentario": "Configurações gerais do site: título da aba do navegador, rodapé, itens do menu de navegação e o conteúdo da capa (Hero). Para adicionar um item ao menu, copie um bloco dentro de 'menu' e ajuste 'rotulo' (texto do link) e 'ancora' (para qual seção ele leva — sempre um # seguido do id da seção em index.html).",
+
+  "site": {
+    "tituloAba": "Portal SGI - Syensqo",
+    "textoRodape": "© 2026 Syensqo - Sistema de Gestão Integrado | Itatiba · Taboão da Serra · Paulínia"
+  },
+
+  "menu": [
+    { "rotulo": "Início", "ancora": "#hero" },
+    { "rotulo": "Links Rápidos", "ancora": "#links-rapidos" },
+    { "rotulo": "Certificações", "ancora": "#certificacoes" },
+    { "rotulo": "Políticas", "ancora": "#politicas" },
+    { "rotulo": "5S", "ancora": "#secao-5s" },
+    { "rotulo": "Cronograma", "ancora": "#cronograma" },
+    { "rotulo": "Documentos Padrão", "ancora": "#documentos-padrao" },
+    { "rotulo": "SWOT", "ancora": "#swot" },
+    { "rotulo": "8 Regras", "ancora": "#oito-regras" },
+    { "rotulo": "Indicadores", "ancora": "#indicadores" }
+  ],
+
+  "hero": {
+    "logo": "imagens/LOGO_SYENSQO.jpeg",
+    "logoAlt": "Logotipo Syensqo",
+    "titulo": "Sistema de Gestão Integrado – SGI",
+    "subtitulo": "Unindo as unidades Itatiba, Taboão da Serra e Paulínia",
+    "frases": [
+      "Qualidade não é um ato, é um hábito!",
+      "Qualidade não é corrigir: é fazer certo na primeira vez!",
+      "Qualidade não é tarefa de um time: é responsabilidade de todos!"
+    ],
+    "intervaloTrocaFraseMs": 6000
+  }
+}

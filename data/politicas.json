@@ -1,0 +1,38 @@
+{
+  "_comentario": "Lista de políticas do SGI. Cada item tem 'titulo' e 'link'. Se um item também tiver 'subItens', eles aparecem como botões extras abaixo (é o caso de Atuação Responsável, que tem 3 documentos de apoio). Exemplo de item simples: { \"titulo\": \"Minha Política\", \"link\": \"https://...\" }. Exemplo de item com sub-itens: { \"titulo\": \"Minha Política\", \"link\": \"https://...\", \"subItens\": [ { \"rotulo\": \"Anexo 1\", \"link\": \"https://...\" } ] }",
+
+  "tituloSecao": "Políticas",
+
+  "itens": [
+    {
+      "titulo": "Política da Qualidade",
+      "link": "https://syensqosa.sharepoint.com/sites/shdqhsescogbunovecare/Shared%20Documents/Forms/AllItems.aspx?viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3&newTargetListUrl=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents&viewpath=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FForms%2FAllItems%2Easpx&id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F14%29%20Pol%C3%ADtica%20da%20Qualidade%2F2026%2DPolitica%20da%20Qualidade%20Syensqo%20Performance%20%26%20Care%2Epdf&parent=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F14%29%20Pol%C3%ADtica%20da%20Qualidade"
+    },
+    {
+      "titulo": "Política de HSE",
+      "link": "https://syensqosa.sharepoint.com/sites/shdqhsescogbunovecare/Shared%20Documents/Forms/AllItems.aspx?viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3&as=json&id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F14%29%20Pol%C3%ADtica%20da%20Qualidade%2C%20HSE%20e%20Controles%2FPolitica%20de%20HSE%5FRev02%5F2026%2Epdf&parent=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F14%29%20Pol%C3%ADtica%20da%20Qualidade%2C%20HSE%20e%20Controles"
+    },
+    {
+      "titulo": "Política Halal",
+      "link": "https://syensqosa-my.sharepoint.com/shared?listurl=https%3A%2F%2Fsyensqosa%2Esharepoint%2Ecom%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents&viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3&id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FHALAL%2FPol%C3%ADtica%20Halal%2FPol%C3%ADtica%20Halal%5FRev02%5FAssinada%2Epdf&parent=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FHALAL%2FPol%C3%ADtica%20Halal"
+    },
+    {
+      "titulo": "Atuação Responsável",
+      "link": "https://syensqosa.sharepoint.com/sites/shdqhsescogbunovecare/Shared%20Documents/Forms/AllItems.aspx?viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3&as=json&id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FAtua%C3%A7%C3%A3o%20Respons%C3%A1vel%2FPol%C3%ADtica%20Atua%C3%A7%C3%A3o%20Respons%C3%A1vel%5F2026%2Epdf&parent=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FAtua%C3%A7%C3%A3o%20Respons%C3%A1vel",
+      "subItens": [
+        {
+          "rotulo": "Declaração de Comprometimento",
+          "link": "https://syensqosa.sharepoint.com/sites/shdqhsescogbunovecare/Shared%20Documents/Forms/AllItems.aspx?viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3&as=json&id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FAtua%C3%A7%C3%A3o%20Respons%C3%A1vel%2FDocumentos%2FDeclaracao%5Fde%5FComprometimento%5Frev02%5F2021%20%281%29%2Epdf&parent=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FAtua%C3%A7%C3%A3o%20Respons%C3%A1vel%2FDocumentos"
+        },
+        {
+          "rotulo": "Nomeação do Coordenador",
+          "link": "https://syensqosa.sharepoint.com/sites/shdqhsescogbunovecare/Shared%20Documents/Forms/AllItems.aspx?viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3&as=json&id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FAtua%C3%A7%C3%A3o%20Respons%C3%A1vel%2FDocumentos%2FNomeacao%5Fdo%5FCoordenador%5Fdo%5FAtuacao%5FResponsavel%5Frev02%5F2021%5Fassinado%2Epdf&parent=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FAtua%C3%A7%C3%A3o%20Respons%C3%A1vel%2FDocumentos"
+        },
+        {
+          "rotulo": "Termo de Adesão",
+          "link": "https://syensqosa.sharepoint.com/sites/shdqhsescogbunovecare/Shared%20Documents/Forms/AllItems.aspx?viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3&as=json&id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FAtua%C3%A7%C3%A3o%20Respons%C3%A1vel%2FDocumentos%2FTermo%5Fadesao%5Fdo%5FAtuacao%5FResponsavel%5Frev02%5F2021%2Epdf&parent=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F07%29%20Certifica%C3%A7%C3%B5es%2FAtua%C3%A7%C3%A3o%20Respons%C3%A1vel%2FDocumentos"
+        }
+      ]
+    }
+  ]
+}

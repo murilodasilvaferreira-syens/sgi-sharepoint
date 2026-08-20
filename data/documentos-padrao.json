@@ -1,0 +1,20 @@
+{
+  "_comentario": "Documentos padrão do SGI. 'tipoArquivo' controla qual ícone aparece no card: use \"word\", \"excel\" ou \"pdf\". Exemplo para adicionar um novo documento: { \"codigo\": \"RHSco-004\", \"titulo\": \"Meu Documento\", \"link\": \"https://...\", \"tipoArquivo\": \"pdf\" }",
+
+  "tituloSecao": "Documentos Padrão",
+
+  "itens": [
+    {
+      "codigo": "RHSco-002",
+      "titulo": "Lista de Presença Padrão Syensqo",
+      "link": "https://syensqosa.sharepoint.com/:w:/r/sites/shdqhsescogbunovecare/_layouts/15/Doc.aspx?sourcedoc=%7B87DBB243-3682-4E8F-A712-EA6A772D4635%7D&file=RHSco-002_Lista%20de%20Presen%C3%A7a%20Padr%C3%A3o%20Syensqo_Rev01%20site.docx&action=default&mobileredirect=true",
+      "tipoArquivo": "word"
+    },
+    {
+      "codigo": "RHSco-003",
+      "titulo": "Lista de Presença com Verificação de Eficácia",
+      "link": "https://syensqosa.sharepoint.com/:x:/r/sites/shdqhsescogbunovecare/_layouts/15/Doc.aspx?sourcedoc=%7BC75F927C-A2DC-4C05-AD8D-5477E0D8B07C%7D&file=RHSco-003_Lista%20Presen%C3%A7a%20com%20Verifica%C3%A7%C3%A3o%20de%20Efic%C3%A1cia%20-%20Syensqo_Rev01.xlsx&action=default&mobileredirect=true",
+      "tipoArquivo": "excel"
+    }
+  ]
+}

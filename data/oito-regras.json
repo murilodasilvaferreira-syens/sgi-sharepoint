@@ -1,0 +1,74 @@
+{
+  "_comentario": "As 8 Regras da Qualidade. Cada regra tem um 'resumo' (sempre visível) e um 'textoCompleto' (aparece ao clicar no card). A regra 3 (5S) é especial: em vez de 'textoCompleto', ela tem 'ancora' apontando para a seção 5S — ao clicar, a página rola até lá em vez de abrir um texto. Para as outras regras, deixe 'ancora' como null. Exemplo de regra nova: { \"numero\": 9, \"titulo\": \"Meu Título\", \"icone\": \"star\" (nome de um ícone de https://lucide.dev/icons), \"resumo\": \"Frase curta\", \"textoCompleto\": \"Texto completo\", \"ancora\": null }",
+
+  "tituloSecao": "8 Regras da Qualidade",
+
+  "linkPdfOficial": "https://syensqosa-my.sharepoint.com/shared?listurl=https%3A%2F%2Fsyensqosa%2Esharepoint%2Ecom%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents&viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3&id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F17%29%208%20Regras%20da%20Qualidade%2FFolder%5F8%20Regras%20da%20Qualidade%5FSyensqo%2Epdf&parent=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F17%29%208%20Regras%20da%20Qualidade",
+
+  "regras": [
+    {
+      "numero": 1,
+      "titulo": "Gestão de Mudança",
+      "icone": "refresh-cw",
+      "resumo": "Toda mudança precisa ser avaliada quanto a impactos em segurança e qualidade antes de ser implementada.",
+      "textoCompleto": "Garantir que todas as mudanças realizadas sejam bem avaliadas quanto aos seus impactos em segurança e qualidade. Gerenciamento de mudanças mal conduzido leva a subestimar os riscos ou simplesmente não identificá-lo corretamente. Uma análise de modificação deverá ser conduzida sempre que um padrão for revisado ou um novo processo implementado.",
+      "ancora": null
+    },
+    {
+      "numero": 2,
+      "titulo": "Potenciais Desvios",
+      "icone": "search",
+      "resumo": "Quanto antes um desvio é identificado, menor o seu impacto.",
+      "textoCompleto": "Em qualquer momento do processo, desde a compra das matérias primas, embalagens, processo produtivo, movimentação, expedição e entrega ao cliente, um potencial de desvio de qualidade poderá ser identificado. Quanto antes identificarmos um potencial desvio, menor será o seu impacto. O melhor cenário é quando uma organização é capaz de identificar os seus desvios de qualidade antes deles gerarem perdas. Trabalhamos assim na cultura de qualidade.",
+      "ancora": null
+    },
+    {
+      "numero": 3,
+      "titulo": "5S",
+      "icone": "layout-grid",
+      "resumo": "Metodologia dos cinco sensos para mobilizar e conscientizar toda a empresa para a Qualidade.",
+      "textoCompleto": null,
+      "ancora": "#secao-5s"
+    },
+    {
+      "numero": 4,
+      "titulo": "Procedimentos",
+      "icone": "list-checks",
+      "resumo": "Seguir os procedimentos com rigor é o que evita desvios de qualidade e segurança.",
+      "textoCompleto": "Procedimentos são padronizações de operações, onde os riscos envolvidos foram avaliados e mitigados. Mesmo que o profissional tenha uma maneira melhor de fazer, a recomendação é que a alteração do procedimento seja discutida com o seu líder, e que uma avaliação seja conduzida antes de alterar qualquer procedimento. Seguir corretamente e com rigor os procedimentos da empresa é fundamental para que não haja desvio de qualidade e segurança.",
+      "ancora": null
+    },
+    {
+      "numero": 5,
+      "titulo": "Registros e Rastreabilidade",
+      "icone": "route",
+      "resumo": "A rastreabilidade do produto depende diretamente da qualidade dos registros.",
+      "textoCompleto": "O preenchimento correto dos registros é fundamental para o entendimento entre as equipes, agilizar a recuperação de dados e auxiliar nas investigações. A rastreabilidade de um produto está ligada à qualidade dos seus registros e representa a capacidade de traçar o caminho do produto do cliente ao fornecedor.",
+      "ancora": null
+    },
+    {
+      "numero": 6,
+      "titulo": "Rótulos e Etiquetas",
+      "icone": "tag",
+      "resumo": "Identificação correta favorece a gestão visual e evita erros de manuseio.",
+      "textoCompleto": "A rotulagem e etiquetagem são fundamentais para a identificação do produto, correta utilização e manuseio. A correta etiquetagem das matérias primas, embalagens e produtos acabados favorecem a gestão visual dos materiais e evitam erros, ainda que existam sistemas de controle do tipo WMS. Etiquetagens diferenciadas como \"Quarentena\" e \"Em Análise\" alertam para cuidados especiais.",
+      "ancora": null
+    },
+    {
+      "numero": 7,
+      "titulo": "Processo de Limpeza",
+      "icone": "sparkles",
+      "resumo": "Limpeza correta de equipamentos compartilhados evita contaminação cruzada.",
+      "textoCompleto": "O correto processo de limpeza dos equipamentos compartilhados (ex. reatores, linhas de transferência, bombas e outros equipamentos móveis) é fundamental para evitar contaminação cruzada de produtos. Um processo de limpeza deve estar implementado na unidade e ser seguido rigorosamente.",
+      "ancora": null
+    },
+    {
+      "numero": 8,
+      "titulo": "Verificação",
+      "icone": "shield-check",
+      "resumo": "Mesmo que o processo anterior pareça robusto, verifique.",
+      "textoCompleto": "Processos industriais são subdivididos em processos menores, onde sempre existirão entrada e saídas. Mesmo que o processo anterior pareça robusto o suficiente para dispensar verificação adicional, verifique!",
+      "ancora": null
+    }
+  ]
+}

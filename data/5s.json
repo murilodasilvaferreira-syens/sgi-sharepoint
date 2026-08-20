@@ -1,0 +1,51 @@
+{
+  "_comentario": "Conteúdo da seção do Programa 5S. 'sensos' é a lista dos 5 pilares, na ordem em que aparecem na página. 'links' são os botões no final da seção, um por unidade. As descrições abaixo são um texto-padrão da metodologia 5S — ajuste como preferir. Exemplo para adicionar um novo link de unidade: { \"rotulo\": \"Paulínia\", \"link\": \"https://...\" }",
+
+  "tituloSecao": "Programa 5S",
+
+  "imagemPrincipal": "imagens/5S_GENERAL_BACKGROUD.jpeg",
+
+  "sensos": [
+    {
+      "nome": "SEIRI",
+      "traducao": "Utilização",
+      "icone": "imagens/5S_SEIRI.jpeg",
+      "descricao": "Separar o que é necessário do que é dispensável, eliminando excessos no ambiente de trabalho."
+    },
+    {
+      "nome": "SEITON",
+      "traducao": "Organização",
+      "icone": "imagens/5S_SEITON.jpeg",
+      "descricao": "Definir um lugar para cada coisa, facilitando o acesso e a localização de materiais."
+    },
+    {
+      "nome": "SEISO",
+      "traducao": "Limpeza",
+      "icone": "imagens/5S_SEISO.jpeg",
+      "descricao": "Manter o ambiente limpo e identificar fontes de sujeira antes que se tornem problemas."
+    },
+    {
+      "nome": "SEIKETSU",
+      "traducao": "Padronização e Saúde",
+      "icone": "imagens/5S_SEIKETSU.jpeg",
+      "descricao": "Criar padrões que sustentem os três primeiros sensos e promovam um ambiente saudável."
+    },
+    {
+      "nome": "SHITSUKE",
+      "traducao": "Disciplina",
+      "icone": "imagens/5S_SHITSUKE.jpeg",
+      "descricao": "Transformar as boas práticas em hábito, garantindo a manutenção contínua dos sensos."
+    }
+  ],
+
+  "links": [
+    {
+      "rotulo": "Itatiba",
+      "link": "https://syensqosa-my.sharepoint.com/shared?id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F16%29%205S%5F2026%2F3S%20%2D%20Itatiba&listurl=https%3A%2F%2Fsyensqosa%2Esharepoint%2Ecom%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents&viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3"
+    },
+    {
+      "rotulo": "Taboão",
+      "link": "https://syensqosa-my.sharepoint.com/shared?id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F16%29%205S%5F2026%2F3S%2DTabo%C3%A3o&listurl=https%3A%2F%2Fsyensqosa%2Esharepoint%2Ecom%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents&viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3"
+    }
+  ]
+}
