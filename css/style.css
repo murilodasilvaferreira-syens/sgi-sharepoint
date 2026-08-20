@@ -2,27 +2,42 @@
    PORTAL DO SGI — Syensqo Brasil
    Folha de estilos única. Organizada por seção, mobile-first.
 
-   PARA TROCAR A COR PRIMÁRIA DO SITE INTEIRO: edite só a variável
-   --cor-acento no bloco :root logo abaixo. Todo o resto do arquivo usa
-   essa variável, então uma única alteração já propaga para o site todo.
+   PARA TROCAR A COR PRIMÁRIA DO SITE INTEIRO: edite só as variáveis
+   --cor-acento e --cor-acento-claro no bloco :root logo abaixo. Todo o
+   resto do arquivo deriva delas, então uma única alteração já propaga.
+
+   REGRA DE OURO DE ÍCONES: lucide.createIcons() troca cada <i data-lucide>
+   por um <svg>. Por isso, todo seletor descendente de ícone precisa listar
+   AS DUAS tags: ".wrapper i, .wrapper svg { ... }". Nunca só "i".
    ========================================================================= */
 
 :root {
   /* ---- Cores ------------------------------------------------------- */
-  /* Laranja Syensqo — usado como destaque pontual (botões, links, hover),
-     nunca como fundo de áreas grandes. O tom abaixo é calibrado para
-     manter contraste >= 4.5:1 (WCAG AA) tanto como texto quanto como
-     fundo de botão com texto branco, nos 3 fundos claros usados no site. */
+  /* Laranja Syensqo. --cor-acento é o único tom usado em TEXTO e em fundo
+     de botão: foi calibrado para manter contraste >= 4.5:1 (WCAG AA) nos
+     fundos claros do site. Os tons mais vivos (--cor-acento-claro,
+     --cor-acento-brilho) são exclusivamente decorativos — degradês, orbs,
+     glows e bordas — e nunca recebem texto por cima. */
   --cor-acento: #BA4F0A;
-  --cor-acento-escuro: #953F08; /* tom mais escuro do acento, usado em :hover/:active */
-  --cor-fundo: #FFFDFB;         /* off-white — fundo geral do site */
-  --cor-fundo-alt: #F5F5F5;     /* cinza claro — fundo alternado entre seções */
-  --cor-texto: #2B2B2B;         /* grafite — texto principal */
-  --cor-texto-claro: #6B6B6B;   /* grafite mais claro — textos secundários */
+  --cor-acento-escuro: #953F08;  /* usado em :hover/:active de botões */
+  --cor-acento-claro: #E2762B;   /* decorativo: fim do degradê */
+  --cor-acento-brilho: #FF9147;  /* decorativo: orbs e brilhos */
+  --cor-acento-suave: #FFF1E6;   /* fundo bem claro de selos e ícones */
+  --cor-acento-suave-2: #FDE3D0; /* variação do fundo suave, para bordas */
+
+  --cor-fundo: #FFFDFB;          /* off-white — fundo geral do site */
+  --cor-fundo-alt: #FBF6F1;      /* areia clara — fundo alternado (mais quente
+                                    que o cinza anterior, casa com o laranja) */
+  --cor-texto: #2B2B2B;          /* grafite — texto principal */
+  --cor-texto-claro: #6B6B6B;    /* grafite mais claro — textos secundários */
   --cor-branco: #FFFFFF;
-  --cor-borda: #E5E2DE;
+  --cor-borda: #E9E1D8;
   --cor-erro: #B3261E;
   --cor-erro-fundo: #FBEAE9;
+
+  /* Degradê institucional, usado em títulos de destaque, botão primário,
+     traço do menu e barra de progresso. */
+  --degrade-acento: linear-gradient(120deg, var(--cor-acento), var(--cor-acento-claro));
 
   /* Cores semânticas usadas no grid do SWOT (data/swot.json usa estes nomes) */
   --cor-swot-verde: #2E7D32;
@@ -48,16 +63,20 @@
   --espaco-2xl: 4rem;
 
   /* ---- Raios e sombras ------------------------------------------------ */
-  --raio-sm: 6px;
-  --raio-md: 12px;
-  --raio-lg: 20px;
-  --sombra-sutil: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --sombra-hover: 0 6px 20px rgba(0, 0, 0, 0.12);
+  --raio-sm: 8px;
+  --raio-md: 14px;
+  --raio-lg: 22px;
+  --raio-pill: 999px;
+  --sombra-sutil: 0 1px 3px rgba(43, 43, 43, 0.07);
+  --sombra-hover: 0 14px 34px -14px rgba(43, 43, 43, 0.28);
+  --sombra-acento: 0 10px 26px -10px rgba(186, 79, 10, 0.45);
+  --sombra-acento-forte: 0 16px 34px -10px rgba(186, 79, 10, 0.55);
 
-  /* ---- Layout ---------------------------------------------------------- */
+  /* ---- Layout e movimento ---------------------------------------------- */
   --largura-maxima: 1200px;
   --altura-nav: 64px;
-  --transicao-padrao: 200ms ease;
+  --transicao-padrao: 220ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  --transicao-lenta: 420ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 /* =========================================================================
@@ -79,6 +98,8 @@ body {
   color: var(--cor-texto);
   background: var(--cor-fundo);
   line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4 {
@@ -89,21 +110,17 @@ h1, h2, h3, h4 {
 }
 
 h1 { font-size: var(--fs-h1); }
-h2 { font-size: var(--fs-h2); font-weight: 600; }
+h2 { font-size: var(--fs-h2); font-weight: 700; }
 h3 { font-size: var(--fs-h3); font-weight: 600; }
 
-p {
-  margin: 0 0 var(--espaco-md);
-}
+p { margin: 0 0 var(--espaco-md); }
 
 a {
   color: var(--cor-acento);
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
-}
+a:hover { text-decoration: underline; }
 
 img {
   max-width: 100%;
@@ -125,7 +142,7 @@ button {
    fica com esse respiro no topo, para o título da seção não ficar escondido
    atrás da navegação sticky. */
 section[id] {
-  scroll-margin-top: calc(var(--altura-nav) + var(--espaco-md));
+  scroll-margin-top: calc(var(--altura-nav) + var(--espaco-lg));
 }
 
 /* ---- Acessibilidade -------------------------------------------------- */
@@ -154,9 +171,7 @@ section[id] {
   transition: top var(--transicao-padrao);
 }
 
-.pular-conteudo:focus {
-  top: var(--espaco-md);
-}
+.pular-conteudo:focus { top: var(--espaco-md); }
 
 :focus-visible {
   outline: 3px solid var(--cor-acento);
@@ -179,62 +194,196 @@ section[id] {
   margin-bottom: var(--espaco-xl);
 }
 
-.titulo-secao p {
-  color: var(--cor-texto-claro);
-  max-width: 640px;
-  margin: 0 auto;
+.titulo-secao h2 {
+  margin-bottom: var(--espaco-sm);
+  letter-spacing: -0.015em;
 }
 
+/* Traço laranja curto sob o título, com o degradê institucional —
+   assinatura visual que se repete em todas as seções. */
+.titulo-secao-texto {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.titulo-secao-texto::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 56px;
+  height: 3px;
+  border-radius: var(--raio-pill);
+  background: var(--degrade-acento);
+  transform: translateX(-50%) scaleX(0.35);
+  transform-origin: center;
+  transition: transform var(--transicao-lenta);
+}
+
+.titulo-secao.visivel .titulo-secao-texto::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.titulo-secao p {
+  color: var(--cor-texto-claro);
+  max-width: 680px;
+  margin: 0 auto var(--espaco-lg);
+}
+
+/* ---- Card genérico ---------------------------------------------------- */
+
 .card {
+  position: relative;
   background: var(--cor-branco);
+  border: 1px solid var(--cor-borda);
   border-radius: var(--raio-md);
   box-shadow: var(--sombra-sutil);
-  transition: box-shadow var(--transicao-padrao), transform var(--transicao-padrao);
+  transition: box-shadow var(--transicao-padrao),
+              transform var(--transicao-padrao),
+              border-color var(--transicao-padrao);
+}
+
+/* Véu laranja quase imperceptível que aparece no hover — o mesmo truque
+   do repositório digital-sharepoint, calibrado bem mais sutil aqui para
+   manter o tom executivo. */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, transparent 40%, var(--cor-acento-suave));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transicao-padrao);
 }
 
 .card:hover {
+  transform: translateY(-4px);
+  border-color: var(--cor-acento-suave-2);
   box-shadow: var(--sombra-hover);
-  transform: translateY(-2px);
 }
+
+.card:hover::before { opacity: 1; }
+
+/* Garante que o conteúdo do card fique acima do véu ::before */
+.card > * { position: relative; z-index: 1; }
+
+/* ---- Botões ----------------------------------------------------------- */
 
 .botao {
+  position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--espaco-sm);
-  background: var(--cor-acento);
-  color: var(--cor-branco);
-  border: none;
-  border-radius: var(--raio-sm);
-  padding: var(--espaco-sm) var(--espaco-lg);
+  border: 1px solid transparent;
+  border-radius: var(--raio-pill);
+  padding: 12px var(--espaco-xl);
   font-weight: 600;
   font-size: var(--fs-pequeno);
-  transition: background var(--transicao-padrao);
+  letter-spacing: 0.01em;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--transicao-padrao),
+              box-shadow var(--transicao-padrao),
+              background var(--transicao-padrao),
+              border-color var(--transicao-padrao),
+              color var(--transicao-padrao);
 }
 
-.botao:hover {
-  background: var(--cor-acento-escuro);
-  text-decoration: none;
+.botao:hover { text-decoration: none; }
+.botao:active { transform: translateY(-1px) scale(0.99); }
+
+.botao i,
+.botao svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: transform var(--transicao-padrao);
 }
+
+.botao:hover i,
+.botao:hover svg { transform: translateX(2px); }
+
+/* Brilho diagonal que atravessa o botão no hover (efeito "shine") */
+.botao::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+  transition: left 620ms ease;
+}
+
+.botao:hover::after { left: 130%; }
+
+/* Botão primário: degradê laranja + glow */
+.botao--primario,
+.botao:not(.botao--fantasma) {
+  background: var(--degrade-acento);
+  color: var(--cor-branco);
+  box-shadow: var(--sombra-acento);
+}
+
+.botao--primario:hover,
+.botao:not(.botao--fantasma):hover {
+  background: linear-gradient(120deg, var(--cor-acento-escuro), var(--cor-acento));
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-acento-forte);
+}
+
+/* Botão de contorno: fundo branco, ganha borda e texto laranja no hover */
+.botao--fantasma {
+  background: var(--cor-branco);
+  color: var(--cor-texto);
+  border-color: var(--cor-borda);
+  box-shadow: var(--sombra-sutil);
+}
+
+.botao--fantasma:hover {
+  color: var(--cor-acento);
+  border-color: var(--cor-acento);
+  background: var(--cor-acento-suave);
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-hover);
+}
+
+.botao--fantasma::after { display: none; }
+
+/* ---- Pill (mini-link de versão de norma / sub-política) ---------------- */
 
 .pill {
   display: inline-block;
-  border: 1px solid var(--cor-acento);
+  border: 1px solid var(--cor-acento-suave-2);
+  background: var(--cor-acento-suave);
   color: var(--cor-acento);
-  border-radius: 999px;
-  padding: var(--espaco-xs) var(--espaco-md);
+  border-radius: var(--raio-pill);
+  padding: 5px var(--espaco-md);
   font-size: var(--fs-pequeno);
   font-weight: 600;
-  transition: background var(--transicao-padrao), color var(--transicao-padrao);
+  transition: background var(--transicao-padrao),
+              color var(--transicao-padrao),
+              border-color var(--transicao-padrao),
+              transform var(--transicao-padrao),
+              box-shadow var(--transicao-padrao);
 }
 
 .pill:hover {
   background: var(--cor-acento);
+  border-color: var(--cor-acento);
   color: var(--cor-branco);
+  transform: translateY(-2px);
+  box-shadow: var(--sombra-acento);
   text-decoration: none;
 }
 
-/* Mensagem discreta de erro, usada por exibirErroSecao() quando um JSON
-   falha ao carregar — o resto da página continua funcionando normalmente. */
+/* ---- Mensagem discreta de erro (exibirErroSecao) ---------------------- */
+
 .erro-secao {
   display: flex;
   align-items: center;
@@ -248,9 +397,6 @@ section[id] {
   font-size: var(--fs-pequeno);
 }
 
-/* Seletor cobre "i" (fallback se o Lucide falhar ao carregar) e "svg"
-   (ícone já processado) — o Lucide substitui <i data-lucide> por <svg>,
-   perdendo qualquer regra CSS que mire só a tag <i>. */
 .erro-secao i,
 .erro-secao svg {
   flex-shrink: 0;
@@ -258,11 +404,14 @@ section[id] {
   height: 20px;
 }
 
-/* Animação de entrada usada pelo IntersectionObserver (inicializarAnimacoesScroll) */
+/* ---- Animação de entrada (IntersectionObserver em main.js) ------------ */
+
 .animar-entrada {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 500ms ease, transform 500ms ease;
+  transform: translateY(22px);
+  transition: opacity 620ms cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 620ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
 }
 
 .animar-entrada.visivel {
@@ -278,60 +427,76 @@ section[id] {
   position: sticky;
   top: 0;
   z-index: 100;
-  height: var(--altura-nav);
-  background: rgba(255, 253, 251, 0.7);
-  backdrop-filter: blur(14px) saturate(160%);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  background: rgba(255, 253, 251, 0.72);
+  backdrop-filter: blur(16px) saturate(170%);
+  -webkit-backdrop-filter: blur(16px) saturate(170%);
   border-bottom: 1px solid transparent;
-  transition: background var(--transicao-padrao), border-color var(--transicao-padrao), box-shadow var(--transicao-padrao);
+  transition: background var(--transicao-padrao),
+              border-color var(--transicao-padrao),
+              box-shadow var(--transicao-padrao);
 }
 
 /* Ganha fundo sólido e sombra só depois que o usuário rola a página —
    efeito de vidro discreto sobre o Hero (ver toggle em inicializarNavegacao). */
 .nav-topo--rolado {
-  background: rgba(255, 253, 251, 0.92);
+  background: rgba(255, 253, 251, 0.94);
   border-bottom-color: var(--cor-borda);
-  box-shadow: 0 12px 24px -16px rgba(43, 43, 43, 0.18);
+  box-shadow: 0 12px 26px -18px rgba(43, 43, 43, 0.22);
 }
 
 .nav-container {
   position: relative;
   max-width: var(--largura-maxima);
-  height: 100%;
+  height: var(--altura-nav);
   margin: 0 auto;
   padding: 0 var(--espaco-lg);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end; /* sem marca à esquerda: menu/toggle à direita */
 }
 
-.nav-marca {
-  font-weight: 700;
-  font-size: 1.35rem;
-  letter-spacing: 0.01em;
-  color: var(--cor-texto);
-}
-
-.nav-marca-acento {
-  color: var(--cor-acento);
-}
-
-.nav-marca:hover {
-  text-decoration: none;
+/* Barra fina de progresso de leitura, colada na base da nav.
+   A largura é definida por JS (inicializarNavegacao). */
+.nav-progresso {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 2px;
+  background: var(--degrade-acento);
+  border-radius: 0 var(--raio-pill) var(--raio-pill) 0;
+  transition: width 120ms linear;
 }
 
 .nav-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: none;
-  border: none;
+  width: 40px;
+  height: 40px;
+  background: var(--cor-branco);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-sm);
   color: var(--cor-texto);
-  padding: var(--espaco-xs);
+  transition: color var(--transicao-padrao),
+              border-color var(--transicao-padrao),
+              background var(--transicao-padrao);
+}
+
+.nav-toggle:hover {
+  color: var(--cor-acento);
+  border-color: var(--cor-acento);
+  background: var(--cor-acento-suave);
 }
 
 .nav-toggle-icone {
   display: flex;
+  width: 22px;
+  height: 22px;
+}
+
+.nav-toggle-icone i,
+.nav-toggle-icone svg {
   width: 22px;
   height: 22px;
 }
@@ -344,6 +509,7 @@ section[id] {
   top: 100%;
   left: var(--espaco-md);
   right: var(--espaco-md);
+  z-index: 2;
   flex-direction: column;
   gap: 2px;
   margin-top: var(--espaco-sm);
@@ -385,12 +551,13 @@ section[id] {
 
 .nav-menu li a:hover,
 .nav-menu li a.ativo {
-  background: var(--cor-fundo-alt);
+  background: var(--cor-acento-suave);
   color: var(--cor-acento);
   text-decoration: none;
 }
 
-/* Fundo escurecido atrás do painel mobile — clicar nele fecha o menu */
+/* Fundo escurecido atrás do painel mobile — clicar nele fecha o menu.
+   É "absolute" (nunca "fixed") por causa do embed em iframe. */
 .nav-backdrop {
   display: none;
   position: absolute;
@@ -416,12 +583,17 @@ section[id] {
     display: none;
   }
 
+  /* Sem marca à esquerda, o menu ocupa a barra inteira e é centralizado */
+  .nav-container { justify-content: center; }
+
   .nav-menu {
     display: flex;
     position: static;
     flex-direction: row;
     align-items: center;
-    gap: var(--espaco-xl);
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(var(--espaco-md), 2.2vw, var(--espaco-xl));
     margin: 0;
     padding: 0;
     background: none;
@@ -435,45 +607,46 @@ section[id] {
     position: relative;
     padding: var(--espaco-sm) 0;
     border-radius: 0;
+    font-size: 0.9rem;
   }
 
   /* Ícones existem só para o painel mobile — desktop fica limpo, sóbrio */
   .nav-menu li a i,
-  .nav-menu li a svg {
-    display: none;
-  }
+  .nav-menu li a svg { display: none; }
 
   .nav-menu li a:hover,
   .nav-menu li a.ativo {
     background: none;
+    color: var(--cor-acento);
   }
 
-  /* Indicador de item ativo/hover: traço desliza por baixo do texto */
+  /* Indicador de item ativo/hover: traço em degradê desliza sob o texto */
   .nav-menu li a::after {
     content: '';
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -3px;
+    bottom: -2px;
     height: 2px;
-    background: var(--cor-acento);
+    border-radius: var(--raio-pill);
+    background: var(--degrade-acento);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform var(--transicao-padrao);
   }
 
   .nav-menu li a:hover::after,
-  .nav-menu li a.ativo::after {
-    transform: scaleX(1);
-  }
+  .nav-menu li a.ativo::after { transform: scaleX(1); }
 }
 
 /* =========================================================================
-   SEÇÕES — bloco genérico comum; regras específicas de cada seção são
-   adicionadas aqui conforme cada uma é implementada (ver plano do projeto).
+   SEÇÕES — bloco genérico. A transição suave entre uma seção e outra é
+   feita por um degradê no topo/base de cada seção alternada, em vez de um
+   corte seco de cor de fundo.
    ========================================================================= */
 
 .secao {
+  position: relative;
   padding: var(--espaco-2xl) 0;
 }
 
@@ -481,164 +654,199 @@ section[id] {
   background: var(--cor-fundo-alt);
 }
 
+/* Faixas de transição: fundem a cor da seção alternada com a cor base,
+   suavizando a costura entre blocos (não recebem nem capturam clique). */
+.secao:nth-of-type(even)::before,
+.secao:nth-of-type(even)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 72px;
+  pointer-events: none;
+}
+
+.secao:nth-of-type(even)::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--cor-fundo), transparent);
+}
+
+.secao:nth-of-type(even)::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--cor-fundo), transparent);
+}
+
+/* O Hero tem seus próprios ::before/::after (glow e vinheta), então
+   as faixas acima nunca se aplicam a ele — ele é a 1ª seção (ímpar). */
+
 /* ---- 1. HERO ----------------------------------------------------------- */
 
 .secao-hero {
   position: relative;
   overflow: hidden;
-  padding: calc(var(--espaco-2xl) * 1.9) 0 calc(var(--espaco-2xl) * 1.3);
+  padding: calc(var(--espaco-2xl) * 1.7) 0 calc(var(--espaco-2xl) * 1.2);
   text-align: center;
   /* Grade de pontos bem sutil — textura de fundo comum em produtos
      premium (Stripe, Linear), quase imperceptível, some nas bordas. */
-  background-image: radial-gradient(circle, rgba(43, 43, 43, 0.08) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-image: radial-gradient(circle, rgba(43, 43, 43, 0.07) 1px, transparent 1px);
+  background-size: 26px 26px;
 }
 
-/* Glow radial atrás do título — dá profundidade sem virar bloco
-   de cor chapada (referência de sofisticação: Linear, Stripe). */
-.secao-hero::before {
-  content: '';
-  position: absolute;
-  top: -30%;
-  left: 50%;
-  width: 900px;
-  height: 900px;
-  transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(186, 79, 10, 0.13) 0%, rgba(186, 79, 10, 0) 70%);
-  pointer-events: none;
-}
-
-/* Esmaece a grade de pontos nas bordas, mantendo o centro nítido —
-   sem isso, a textura fica uniforme demais e perde a sutileza. */
+/* Esmaece a grade de pontos nas bordas, mantendo o centro nítido. */
 .secao-hero::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 30%, var(--cor-fundo) 85%);
+  background: radial-gradient(ellipse at center, transparent 28%, var(--cor-fundo) 86%);
   pointer-events: none;
+}
+
+/* Orbs laranja desfocadas (inspiradas no repo digital-sharepoint), aqui
+   com opacidade bem mais baixa para não competir com o texto. São
+   "absolute" dentro do Hero — nunca "fixed" (restrição do iframe). */
+.hero-orbs {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.28;
+  animation: hero-orb-flutuar 20s ease-in-out infinite;
+}
+
+.hero-orb-1 {
+  width: 420px;
+  height: 420px;
+  background: var(--cor-acento-brilho);
+  top: -160px;
+  left: -110px;
+}
+
+.hero-orb-2 {
+  width: 360px;
+  height: 360px;
+  background: var(--cor-acento-claro);
+  bottom: -140px;
+  right: -90px;
+  animation-delay: -7s;
+}
+
+.hero-orb-3 {
+  width: 300px;
+  height: 300px;
+  background: #FFCF9E;
+  top: 34%;
+  left: 56%;
+  animation-delay: -13s;
+  opacity: 0.22;
+}
+
+@keyframes hero-orb-flutuar {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(28px, -36px) scale(1.1); }
 }
 
 .hero-conteudo {
   position: relative;
-  z-index: 1;
-  max-width: 720px;
+  z-index: 2;
+  max-width: 800px;
 }
 
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--espaco-xs);
-  margin: 0 auto var(--espaco-lg);
-  padding: 6px 16px;
-  border: 1px solid var(--cor-borda);
-  border-radius: 999px;
-  background: var(--cor-branco);
-  color: var(--cor-texto-claro);
-  font-size: var(--fs-pequeno);
-  font-weight: 600;
-  box-shadow: var(--sombra-sutil);
-}
-
-.hero-eyebrow i,
-.hero-eyebrow svg {
-  width: 14px;
-  height: 14px;
+/* Selo superior em pill laranja suave */
+.hero-eyebrow-pill {
+  display: inline-block;
+  margin-bottom: var(--espaco-lg);
+  padding: 7px 18px;
+  border: 1px solid var(--cor-acento-suave-2);
+  border-radius: var(--raio-pill);
+  background: var(--cor-acento-suave);
   color: var(--cor-acento);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .secao-hero h1 {
-  margin-bottom: var(--espaco-xl);
+  margin-bottom: var(--espaco-lg);
   font-size: var(--fs-hero);
-  letter-spacing: -0.02em;
+  font-weight: 800;
+  letter-spacing: -0.025em;
   line-height: 1.08;
 }
 
-/* Frase rotativa tratada como um cartão flutuante de citação, em vez de
-   um bloco com traço lateral — mais integrado ao restante do layout,
-   que agora é centralizado do início ao fim. */
-.hero-frase-card {
-  position: relative;
-  z-index: 1;
-  max-width: 560px;
-  margin: 0 auto;
-  padding: var(--espaco-xl) var(--espaco-xl) var(--espaco-lg);
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(43, 43, 43, 0.07);
-  border-radius: var(--raio-lg);
-  box-shadow: var(--sombra-sutil);
+/* Trecho do título pintado com o degradê laranja */
+.hero-destaque {
+  background: var(--degrade-acento);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.hero-frase-aspas {
-  width: 26px;
-  height: 26px;
-  margin-bottom: var(--espaco-sm);
-  color: var(--cor-acento);
-  opacity: 0.45;
-}
-
-.hero-frase-caixa {
-  position: relative;
-  min-height: 4.75em;
-}
-
+/* Frase única (substituiu o antigo carrossel de frases) */
 .hero-frase {
-  position: absolute;
-  inset: 0;
-  margin: 0;
-  font-size: 1.15rem;
-  font-weight: 600;
+  max-width: 620px;
+  margin: 0 auto var(--espaco-lg);
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  font-weight: 500;
   font-style: italic;
-  line-height: 1.4;
-  opacity: 0;
-  transition: opacity 700ms ease;
+  color: var(--cor-texto-claro);
 }
 
-.hero-frase.ativa {
-  opacity: 1;
+.hero-unidades {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-xs);
+  margin-bottom: var(--espaco-xl);
+  color: var(--cor-texto-claro);
+  font-size: var(--fs-pequeno);
+  font-weight: 600;
 }
 
-.hero-frase-dots {
+.hero-unidades i,
+.hero-unidades svg {
+  width: 15px;
+  height: 15px;
+  color: var(--cor-acento);
+}
+
+.hero-acoes {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 6px;
-  margin-top: var(--espaco-md);
-}
-
-.hero-frase-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--cor-borda);
-  transition: background var(--transicao-padrao), transform var(--transicao-padrao);
-}
-
-.hero-frase-dot.ativa {
-  background: var(--cor-acento);
-  transform: scale(1.3);
+  gap: var(--espaco-md);
 }
 
 /* Convite discreto para rolar a página, com balanço suave (neutralizado
-   automaticamente pelo bloco global de prefers-reduced-motion). */
+   automaticamente pelo bloco global de prefers-reduced-motion no fim). */
 .hero-scroll-cue {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   margin: var(--espaco-xl) auto 0;
   border: 1px solid var(--cor-borda);
   border-radius: 50%;
+  background: var(--cor-branco);
   color: var(--cor-texto-claro);
   animation: hero-scroll-cue-flutuar 2.2s ease-in-out infinite;
+  transition: color var(--transicao-padrao),
+              border-color var(--transicao-padrao),
+              box-shadow var(--transicao-padrao);
 }
 
 .hero-scroll-cue:hover {
   color: var(--cor-acento);
   border-color: var(--cor-acento);
+  box-shadow: var(--sombra-acento);
   text-decoration: none;
 }
 
@@ -653,12 +861,6 @@ section[id] {
   50% { transform: translateY(5px); }
 }
 
-@media (min-width: 640px) {
-  .hero-frase-caixa {
-    min-height: 3em;
-  }
-}
-
 /* ---- 2. LINKS RÁPIDOS --------------------------------------------------- */
 
 .link-rapido-grid {
@@ -668,7 +870,6 @@ section[id] {
 }
 
 .link-rapido-card {
-  position: relative;
   display: flex;
   align-items: center;
   gap: var(--espaco-md);
@@ -677,10 +878,10 @@ section[id] {
   color: var(--cor-texto);
 }
 
-.link-rapido-card:hover {
-  text-decoration: none;
-}
+.link-rapido-card:hover { text-decoration: none; }
 
+/* Todos os ícones agora são Lucide, então o quadrado do ícone pode ter
+   tratamento uniforme: fundo laranja suave que "acende" no hover. */
 .link-rapido-icone {
   display: flex;
   flex-shrink: 0;
@@ -689,20 +890,25 @@ section[id] {
   width: 48px;
   height: 48px;
   border-radius: var(--raio-sm);
-  background: var(--cor-fundo-alt);
+  background: var(--cor-acento-suave);
   color: var(--cor-acento);
-}
-
-.link-rapido-icone img {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
+  transition: background var(--transicao-padrao),
+              color var(--transicao-padrao),
+              transform var(--transicao-padrao),
+              box-shadow var(--transicao-padrao);
 }
 
 .link-rapido-icone i,
 .link-rapido-icone svg {
   width: 24px;
   height: 24px;
+}
+
+.link-rapido-card:hover .link-rapido-icone {
+  background: var(--degrade-acento);
+  color: var(--cor-branco);
+  transform: scale(1.06) rotate(-3deg);
+  box-shadow: var(--sombra-acento);
 }
 
 .link-rapido-titulo {
@@ -716,12 +922,15 @@ section[id] {
   position: absolute;
   top: var(--espaco-md);
   right: var(--espaco-md);
+  z-index: 1;
   width: 16px;
   height: 16px;
   color: var(--cor-texto-claro);
   opacity: 0;
   transform: translate(-4px, 4px);
-  transition: opacity var(--transicao-padrao), transform var(--transicao-padrao), color var(--transicao-padrao);
+  transition: opacity var(--transicao-padrao),
+              transform var(--transicao-padrao),
+              color var(--transicao-padrao);
 }
 
 .link-rapido-card:hover .link-rapido-seta {
@@ -745,7 +954,24 @@ section[id] {
   gap: var(--espaco-xs);
   padding: var(--espaco-xl) var(--espaco-lg);
   text-align: center;
+  overflow: hidden;
 }
+
+/* Filete laranja no topo do card, revelado no hover */
+.certificacao-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--degrade-acento);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--transicao-padrao);
+}
+
+.certificacao-card:hover::after { transform: scaleX(1); }
 
 .certificacao-imagem {
   display: flex;
@@ -759,11 +985,12 @@ section[id] {
   max-height: 72px;
   max-width: 140px;
   object-fit: contain;
+  transition: transform var(--transicao-padrao);
 }
 
-.certificacao-card h3 {
-  margin-bottom: var(--espaco-xs);
-}
+.certificacao-card:hover .certificacao-imagem img { transform: scale(1.05); }
+
+.certificacao-card h3 { margin-bottom: var(--espaco-xs); }
 
 .certificacao-pills {
   display: flex;
@@ -782,10 +1009,25 @@ section[id] {
 }
 
 .politica-card {
-  position: relative;
   padding: var(--espaco-lg);
   overflow: hidden;
 }
+
+/* Barra lateral laranja que cresce no hover */
+.politica-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--degrade-acento);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--transicao-padrao);
+}
+
+.politica-card:hover::after { transform: scaleY(1); }
 
 .politica-cabecalho {
   display: flex;
@@ -801,8 +1043,11 @@ section[id] {
   width: 44px;
   height: 44px;
   border-radius: var(--raio-sm);
-  background: var(--cor-fundo-alt);
+  background: var(--cor-acento-suave);
   color: var(--cor-acento);
+  transition: background var(--transicao-padrao),
+              color var(--transicao-padrao),
+              box-shadow var(--transicao-padrao);
 }
 
 .politica-icone i,
@@ -811,10 +1056,17 @@ section[id] {
   height: 22px;
 }
 
+.politica-card:hover .politica-icone {
+  background: var(--degrade-acento);
+  color: var(--cor-branco);
+  box-shadow: var(--sombra-acento);
+}
+
 .politica-titulo-link {
   flex: 1;
   font-weight: 600;
   color: var(--cor-texto);
+  transition: color var(--transicao-padrao);
 }
 
 .politica-titulo-link:hover {
@@ -826,12 +1078,15 @@ section[id] {
   position: absolute;
   top: var(--espaco-md);
   right: var(--espaco-md);
+  z-index: 1;
   width: 16px;
   height: 16px;
   color: var(--cor-texto-claro);
   opacity: 0;
   transform: translate(-4px, 4px);
-  transition: opacity var(--transicao-padrao), transform var(--transicao-padrao), color var(--transicao-padrao);
+  transition: opacity var(--transicao-padrao),
+              transform var(--transicao-padrao),
+              color var(--transicao-padrao);
 }
 
 .politica-card:hover .politica-seta {
@@ -850,23 +1105,11 @@ section[id] {
 }
 
 /* ---- 5. PROGRAMA 5S ------------------------------------------------------ */
-
-.cinco-s-banner {
-  overflow: hidden;
-  margin-bottom: var(--espaco-xl);
-  border-radius: var(--raio-lg);
-  box-shadow: var(--sombra-sutil);
-}
-
-.cinco-s-banner img {
-  width: 100%;
-  max-height: 320px;
-  object-fit: cover;
-}
+/* A imagem de banner do topo desta seção foi removida do layout. */
 
 .cinco-s-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: var(--espaco-lg);
   margin-bottom: var(--espaco-xl);
 }
@@ -875,22 +1118,55 @@ section[id] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--espaco-lg) var(--espaco-md);
+  padding: var(--espaco-xl) var(--espaco-md) var(--espaco-lg);
   text-align: center;
+  overflow: hidden;
+}
+
+/* Selo "1º S", "2º S"... no canto superior do card */
+.cinco-s-numero {
+  position: absolute;
+  top: var(--espaco-sm);
+  right: var(--espaco-md);
+  z-index: 1;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--cor-acento);
+  opacity: 0.55;
+}
+
+/* Anel laranja em degradê ao redor da foto do senso */
+.cinco-s-icone-anel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  margin-bottom: var(--espaco-md);
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--degrade-acento);
+  box-shadow: var(--sombra-sutil);
+  transition: transform var(--transicao-padrao), box-shadow var(--transicao-padrao);
+}
+
+.cinco-s-card:hover .cinco-s-icone-anel {
+  transform: scale(1.05);
+  box-shadow: var(--sombra-acento);
 }
 
 .cinco-s-icone {
-  width: 88px;
-  height: 88px;
-  margin-bottom: var(--espaco-md);
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: var(--sombra-sutil);
+  border: 3px solid var(--cor-branco);
 }
 
 .cinco-s-card h3 {
   margin-bottom: 0;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
 }
 
 .cinco-s-traducao {
@@ -931,6 +1207,10 @@ section[id] {
   display: flex;
   align-items: center;
   gap: var(--espaco-xs);
+  padding: 5px var(--espaco-md);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pill);
+  background: var(--cor-branco);
 }
 
 .cronograma-legenda-cor {
@@ -955,7 +1235,7 @@ section[id] {
   --fc-button-hover-bg-color: var(--cor-acento-escuro);
   --fc-button-hover-border-color: var(--cor-acento-escuro);
   --fc-button-active-bg-color: var(--cor-acento-escuro);
-  --fc-today-bg-color: rgba(186, 79, 10, 0.08);
+  --fc-today-bg-color: rgba(186, 79, 10, 0.09);
   --fc-page-bg-color: transparent;
   font-family: var(--fonte-principal);
   font-size: var(--fs-pequeno);
@@ -963,23 +1243,33 @@ section[id] {
 
 .cronograma-calendario-wrapper .fc-toolbar-title {
   font-size: var(--fs-h3);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .cronograma-calendario-wrapper .fc-button {
   font-weight: 600;
   text-transform: capitalize;
+  border-radius: var(--raio-sm) !important;
   box-shadow: none !important;
+  transition: transform var(--transicao-padrao), box-shadow var(--transicao-padrao);
+}
+
+.cronograma-calendario-wrapper .fc-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sombra-acento) !important;
 }
 
 .cronograma-calendario-wrapper .fc-daygrid-event {
   border-radius: var(--raio-sm);
-  padding: 1px 4px;
+  padding: 1px 5px;
+  font-weight: 600;
+  transition: transform var(--transicao-padrao);
 }
 
+.cronograma-calendario-wrapper .fc-daygrid-event:hover { transform: translateY(-1px); }
+
 /* Em telas estreitas, os 3 grupos da barra de ferramentas do FullCalendar
-   (navegação, título, seletor de view) não cabem numa linha só — empilha
-   e centraliza cada grupo em vez de deixar o padrão da lib quebrar torto. */
+   não cabem numa linha só — empilha e centraliza cada grupo. */
 @media (max-width: 640px) {
   .cronograma-calendario-wrapper .fc-header-toolbar {
     flex-direction: column;
@@ -1001,7 +1291,6 @@ section[id] {
 }
 
 .documento-card {
-  position: relative;
   display: flex;
   align-items: center;
   gap: var(--espaco-md);
@@ -1010,55 +1299,67 @@ section[id] {
   color: var(--cor-texto);
 }
 
-.documento-card:hover {
-  text-decoration: none;
-}
+.documento-card:hover { text-decoration: none; }
 
 .documento-icone {
   display: flex;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   border-radius: var(--raio-sm);
-  background: var(--cor-fundo-alt);
+  background: var(--cor-acento-suave);
   color: var(--cor-acento);
+  transition: background var(--transicao-padrao),
+              color var(--transicao-padrao),
+              box-shadow var(--transicao-padrao);
 }
 
 .documento-icone i,
 .documento-icone svg {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
+}
+
+.documento-card:hover .documento-icone {
+  background: var(--degrade-acento);
+  color: var(--cor-branco);
+  box-shadow: var(--sombra-acento);
 }
 
 .documento-texto {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  min-width: 0;
 }
 
 .documento-codigo {
-  font-size: var(--fs-pequeno);
+  font-size: 0.72rem;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--cor-acento);
-  letter-spacing: 0.02em;
 }
 
 .documento-titulo {
   font-weight: 600;
+  font-size: 0.95rem;
 }
 
 .documento-seta {
   position: absolute;
   top: var(--espaco-md);
   right: var(--espaco-md);
+  z-index: 1;
   width: 16px;
   height: 16px;
   color: var(--cor-texto-claro);
   opacity: 0;
   transform: translate(-4px, 4px);
-  transition: opacity var(--transicao-padrao), transform var(--transicao-padrao), color var(--transicao-padrao);
+  transition: opacity var(--transicao-padrao),
+              transform var(--transicao-padrao),
+              color var(--transicao-padrao);
 }
 
 .documento-card:hover .documento-seta {
@@ -1067,136 +1368,178 @@ section[id] {
   color: var(--cor-acento);
 }
 
-/* ---- 8. SWOT -------------------------------------------------------------- */
+/* ---- 8. MATRIZ SWOT ------------------------------------------------------ */
 
 .swot-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--espaco-lg);
+  align-items: start;
 }
-
-@media (max-width: 640px) {
-  .swot-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Entrada escalonada: cada quadrante aparece um pouco depois do anterior. */
-.swot-grid .animar-entrada:nth-child(1) { transition-delay: 0ms; }
-.swot-grid .animar-entrada:nth-child(2) { transition-delay: 100ms; }
-.swot-grid .animar-entrada:nth-child(3) { transition-delay: 200ms; }
-.swot-grid .animar-entrada:nth-child(4) { transition-delay: 300ms; }
 
 .swot-quadrante {
   padding: var(--espaco-lg);
-  border-left: 4px solid transparent;
+  overflow: hidden;
+  /* --cor-quadrante é redefinida por cada modificador de cor abaixo */
+  --cor-quadrante: var(--cor-acento);
 }
 
-.swot-verde { border-left-color: var(--cor-swot-verde); }
-.swot-vermelho { border-left-color: var(--cor-swot-vermelho); }
-.swot-azul { border-left-color: var(--cor-swot-azul); }
-.swot-laranja { border-left-color: var(--cor-swot-laranja); }
+/* Faixa colorida no topo, identificando o quadrante */
+.swot-quadrante::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--cor-quadrante);
+  opacity: 0.85;
+  transition: opacity var(--transicao-padrao);
+}
+
+.swot-quadrante:hover::after { opacity: 1; }
+
+.swot-verde    { --cor-quadrante: var(--cor-swot-verde); }
+.swot-vermelho { --cor-quadrante: var(--cor-swot-vermelho); }
+.swot-azul     { --cor-quadrante: var(--cor-swot-azul); }
+.swot-laranja  { --cor-quadrante: var(--cor-swot-laranja); }
 
 .swot-cabecalho {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--espaco-sm);
   margin-bottom: var(--espaco-md);
 }
 
+.swot-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--raio-sm);
+  /* 12% da cor do quadrante sobre branco: fundo suave, ícone legível */
+  background: color-mix(in srgb, var(--cor-quadrante) 12%, var(--cor-branco));
+  color: var(--cor-quadrante);
+  transition: transform var(--transicao-padrao);
+}
+
+.swot-quadrante:hover .swot-icone { transform: scale(1.06); }
+
+.swot-icone i,
+.swot-icone svg {
+  width: 20px;
+  height: 20px;
+}
+
 .swot-cabecalho h3 {
   margin: 0;
+  flex: 1;
+  color: var(--cor-quadrante);
 }
 
-.swot-cabecalho i,
-.swot-cabecalho svg {
-  width: 22px;
-  height: 22px;
+/* Selo "Interno · Ajuda" / "Externo · Atrapalha" */
+.swot-origem {
+  padding: 3px 10px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pill);
+  background: var(--cor-fundo-alt);
+  color: var(--cor-texto-claro);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
-.swot-verde .swot-cabecalho { color: var(--cor-swot-verde); }
-.swot-vermelho .swot-cabecalho { color: var(--cor-swot-vermelho); }
-.swot-azul .swot-cabecalho { color: var(--cor-swot-azul); }
-.swot-laranja .swot-cabecalho { color: var(--cor-swot-laranja); }
+/* Texto explicativo do que aquele quadrante significa */
+.swot-descricao {
+  margin: 0 0 var(--espaco-md);
+  color: var(--cor-texto);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
 
-.swot-verde .swot-cabecalho h3 { color: var(--cor-swot-verde); }
-.swot-vermelho .swot-cabecalho h3 { color: var(--cor-swot-vermelho); }
-.swot-azul .swot-cabecalho h3 { color: var(--cor-swot-azul); }
-.swot-laranja .swot-cabecalho h3 { color: var(--cor-swot-laranja); }
-
+/* Perguntas-guia do quadrante */
 .swot-lista {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espaco-sm);
+  padding-top: var(--espaco-md);
+  border-top: 1px solid var(--cor-borda);
 }
 
 .swot-lista li {
   position: relative;
-  padding-left: var(--espaco-md);
+  padding-left: var(--espaco-lg);
+  margin-bottom: var(--espaco-sm);
   color: var(--cor-texto-claro);
   font-size: var(--fs-pequeno);
 }
 
+.swot-lista li:last-child { margin-bottom: 0; }
+
+/* Marcador circular na cor do quadrante */
 .swot-lista li::before {
   content: '';
   position: absolute;
-  top: 0.5em;
-  left: 0;
-  width: 5px;
-  height: 5px;
+  left: 4px;
+  top: 0.6em;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: var(--cor-texto-claro);
+  background: var(--cor-quadrante);
 }
 
-.swot-verde .swot-lista li::before { background: var(--cor-swot-verde); }
-.swot-vermelho .swot-lista li::before { background: var(--cor-swot-vermelho); }
-.swot-azul .swot-lista li::before { background: var(--cor-swot-azul); }
-.swot-laranja .swot-lista li::before { background: var(--cor-swot-laranja); }
-
-/* ---- 9. OITO REGRAS DA QUALIDADE ------------------------------------------ */
+/* ---- 9. OITO REGRAS DA QUALIDADE ----------------------------------------- */
 
 .regra-lista {
   display: flex;
   flex-direction: column;
   gap: var(--espaco-md);
-  max-width: 760px;
+  max-width: 860px;
   margin: 0 auto;
 }
 
-.regra-card {
-  padding: 0;
-}
+.regra-card { overflow: hidden; }
 
 .regra-cabecalho {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--espaco-md);
   width: 100%;
   padding: var(--espaco-lg);
   background: none;
   border: none;
-  color: var(--cor-texto);
   text-align: left;
-  font-family: inherit;
+  color: var(--cor-texto);
+  transition: background var(--transicao-padrao);
+}
+
+.regra-cabecalho:hover {
+  background: var(--cor-acento-suave);
+  text-decoration: none;
 }
 
 .regra-numero {
   flex-shrink: 0;
-  width: 2.5rem;
-  color: var(--cor-acento);
-  opacity: 0.3;
-  font-size: 2.25rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 800;
   line-height: 1;
-  font-variant-numeric: tabular-nums;
+  background: var(--degrade-acento);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0.75;
+  transition: opacity var(--transicao-padrao);
 }
+
+.regra-card:hover .regra-numero { opacity: 1; }
 
 .regra-titulo-bloco {
   display: flex;
-  flex: 1;
   flex-direction: column;
-  gap: 4px;
-  padding-top: 4px;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
 }
 
 .regra-titulo-linha {
@@ -1207,19 +1550,20 @@ section[id] {
 
 .regra-icone {
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   color: var(--cor-acento);
 }
 
 .regra-titulo {
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 .regra-resumo {
   color: var(--cor-texto-claro);
   font-size: var(--fs-pequeno);
+  font-weight: 400;
 }
 
 .regra-chevron,
@@ -1227,114 +1571,39 @@ section[id] {
   flex-shrink: 0;
   width: 20px;
   height: 20px;
-  margin-top: 8px;
   color: var(--cor-texto-claro);
   transition: transform var(--transicao-padrao), color var(--transicao-padrao);
 }
 
+.regra-cabecalho:hover .regra-chevron,
+.regra-cabecalho:hover .regra-seta-ancora { color: var(--cor-acento); }
+
 .regra-card.aberto .regra-chevron {
-  color: var(--cor-acento);
   transform: rotate(180deg);
-}
-
-.regra-ancora .regra-cabecalho:hover .regra-seta-ancora {
   color: var(--cor-acento);
-  transform: translateX(3px);
 }
 
-/* Animação de altura suave sem precisar medir scrollHeight via JS:
-   o container de 0fr para 1fr faz a transição, e o "inner" com
-   overflow:hidden garante que o texto não vaze durante a animação. */
+.regra-ancora .regra-cabecalho:hover .regra-seta-ancora { transform: translateX(4px); }
+
+/* Abertura animada via grid-template-rows (0fr -> 1fr): robusto a
+   conteúdo de altura variável, sem JS medindo scrollHeight. */
 .regra-conteudo {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 350ms ease;
+  transition: grid-template-rows var(--transicao-lenta);
 }
 
-.regra-card.aberto .regra-conteudo {
-  grid-template-rows: 1fr;
-}
+.regra-card.aberto .regra-conteudo { grid-template-rows: 1fr; }
 
-.regra-conteudo-inner {
-  overflow: hidden;
-}
+.regra-conteudo-inner { overflow: hidden; }
 
 .regra-conteudo-texto {
   margin: 0;
-  padding: 0 var(--espaco-lg) var(--espaco-lg) calc(var(--espaco-lg) + 2.5rem + var(--espaco-md));
+  padding: 0 var(--espaco-lg) var(--espaco-lg) calc(var(--espaco-lg) + 2.6rem);
   color: var(--cor-texto-claro);
-  font-size: var(--fs-pequeno);
-}
-
-@media (max-width: 640px) {
-  .regra-numero {
-    width: 1.8rem;
-    font-size: 1.75rem;
-  }
-
-  .regra-conteudo-texto {
-    padding-left: var(--espaco-lg);
-  }
-}
-
-/* ---- 10. INDICADORES (placeholder até a Fase 2) --------------------------- */
-
-.indicadores-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--espaco-sm);
-  max-width: 560px;
-  margin: 0 auto;
-  padding: var(--espaco-2xl) var(--espaco-xl);
-  text-align: center;
-}
-
-.indicadores-icone {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 72px;
-  height: 72px;
-  margin-bottom: var(--espaco-sm);
-  border-radius: 50%;
-  background: var(--cor-fundo-alt);
-  color: var(--cor-acento);
-}
-
-.indicadores-icone i,
-.indicadores-icone svg {
-  width: 32px;
-  height: 32px;
-}
-
-.indicadores-titulo-linha {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: var(--espaco-sm);
-}
-
-.indicadores-titulo-linha h2 {
-  margin: 0;
-}
-
-.indicadores-badge {
-  display: inline-block;
-  padding: 4px 14px;
-  border-radius: 999px;
-  background: rgba(186, 79, 10, 0.12);
-  color: var(--cor-acento);
-  font-size: var(--fs-pequeno);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.indicadores-placeholder p {
-  color: var(--cor-texto-claro);
-  margin: var(--espaco-sm) 0 var(--espaco-md);
+  font-size: 0.95rem;
+  border-top: 1px solid var(--cor-borda);
+  padding-top: var(--espaco-lg);
 }
 
 /* =========================================================================
@@ -1342,34 +1611,55 @@ section[id] {
    ========================================================================= */
 
 .rodape {
-  padding: var(--espaco-lg);
+  position: relative;
+  padding: var(--espaco-xl) var(--espaco-lg);
   text-align: center;
   color: var(--cor-texto-claro);
   font-size: var(--fs-pequeno);
+  background: var(--cor-fundo);
   border-top: 1px solid var(--cor-borda);
 }
 
+/* Filete laranja no topo do rodapé, fechando a página */
+.rodape::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(320px, 60%);
+  height: 2px;
+  border-radius: var(--raio-pill);
+  background: var(--degrade-acento);
+}
+
+.rodape p { margin: 0; }
+
 /* =========================================================================
-   ACESSIBILIDADE DE MOVIMENTO
-   Desliga animações e scroll suave para quem configurou o SO/navegador
-   para reduzir movimento.
+   PREFERÊNCIA POR MENOS MOVIMENTO
+   Neutraliza todas as animações decorativas. Os elementos .animar-entrada
+   nascem visíveis (o JS nem chega a criar o IntersectionObserver).
    ========================================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  html { scroll-behavior: auto; }
 
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
   }
 
   .animar-entrada {
     opacity: 1;
     transform: none;
+    transition-delay: 0ms !important;
   }
+
+  .titulo-secao-texto::after { transform: translateX(-50%) scaleX(1); }
+
+  .hero-orb { animation: none; }
 }
