@@ -1,5 +1,5 @@
 {
-  "_comentario": "Configurações gerais do site: título da aba do navegador, rodapé, itens do menu de navegação e o conteúdo da capa (Hero). Para adicionar um item ao menu, copie um bloco dentro de 'menu' e troque o rótulo, a âncora (o id da seção no index.html, começando com #) e o ícone (nome de https://lucide.dev/icons). No 'hero': 'titulo' é o título grande; a parte escrita em 'tituloDestaque' aparece pintada com o degradê laranja; 'frase' é a citação única abaixo do título; 'acoes' são os dois botões (o primeiro é laranja preenchido, o segundo é o de contorno).",
+  "_comentario": "Configurações gerais do site: título da aba do navegador, rodapé, itens do menu de navegação e o conteúdo da capa (Hero). Para adicionar um item ao menu, copie um bloco dentro de 'menu' e troque o rótulo, a âncora (o id da seção no index.html, começando com #) e o ícone (nome de https://lucide.dev/icons). No 'hero': 'titulo' é o título grande; a parte escrita em 'tituloDestaque' aparece pintada com o degradê laranja; 'frase' é a citação única abaixo do título.",
 
   "site": {
     "tituloAba": "Portal SGI - Syensqo",
@@ -18,13 +18,11 @@
     { "rotulo": "8 Regras", "ancora": "#oito-regras", "icone": "shield-check" }
   ],
 
-    "hero": {
+  "hero": {
     "eyebrow": "Syensqo Brasil · Qualidade e HSE",
     "titulo": "Sistema de Gestão Integrado",
     "tituloDestaque": "que transforma padrão em resultado",
     "unidades": ["Itatiba", "Taboão da Serra", "Paulínia"],
     "frase": "Qualidade não é um ato, é um hábito."
-    }
-    ]
   }
 }
