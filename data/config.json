@@ -1,5 +1,5 @@
 {
-  "_comentario": "Configurações gerais do site: título da aba do navegador, rodapé, itens do menu de navegação e o conteúdo da capa (Hero). Para adicionar um item ao menu, copie um bloco dentro de 'menu' e ajuste 'rotulo' (texto do link), 'ancora' (para qual seção ele leva — sempre um # seguido do id da seção em index.html) e 'icone' (nome de um ícone de https://lucide.dev/icons, usado no menu do celular).",
+  "_comentario": "Configurações gerais do site: título da aba do navegador, rodapé, itens do menu de navegação e o conteúdo da capa (Hero). Para adicionar um item ao menu, copie um bloco dentro de 'menu' e troque o rótulo, a âncora (o id da seção no index.html, começando com #) e o ícone (nome de https://lucide.dev/icons). No 'hero': 'titulo' é o título grande; a parte escrita em 'tituloDestaque' aparece pintada com o degradê laranja; 'frase' é a citação única abaixo do título; 'acoes' são os dois botões (o primeiro é laranja preenchido, o segundo é o de contorno).",
 
   "site": {
     "tituloAba": "Portal SGI - Syensqo",
@@ -13,20 +13,20 @@
     { "rotulo": "Políticas", "ancora": "#politicas", "icone": "file-text" },
     { "rotulo": "5S", "ancora": "#secao-5s", "icone": "layout-grid" },
     { "rotulo": "Cronograma", "ancora": "#cronograma", "icone": "calendar" },
-    { "rotulo": "Documentos Padrão", "ancora": "#documentos-padrao", "icone": "file-check-2" },
+    { "rotulo": "Documentos", "ancora": "#documentos-padrao", "icone": "file-check-2" },
     { "rotulo": "SWOT", "ancora": "#swot", "icone": "grid-2x2" },
-    { "rotulo": "8 Regras", "ancora": "#oito-regras", "icone": "shield-check" },
-    { "rotulo": "Indicadores", "ancora": "#indicadores", "icone": "bar-chart-3" }
+    { "rotulo": "8 Regras", "ancora": "#oito-regras", "icone": "shield-check" }
   ],
 
   "hero": {
-    "titulo": "Sistema de Gestão Integrado – SGI",
+    "eyebrow": "Syensqo Brasil · Qualidade e HSE",
+    "titulo": "Sistema de Gestão Integrado",
+    "tituloDestaque": "que transforma padrão em resultado",
     "unidades": ["Itatiba", "Taboão da Serra", "Paulínia"],
-    "frases": [
-      "Qualidade não é um ato, é um hábito!",
-      "Qualidade não é corrigir: é fazer certo na primeira vez!",
-      "Qualidade não é tarefa de um time: é responsabilidade de todos!"
-    ],
-    "intervaloTrocaFraseMs": 6000
+    "frase": "Qualidade não é um ato, é um hábito.",
+    "acoes": [
+      { "texto": "Acessar links rápidos", "ancora": "#links-rapidos", "icone": "zap", "estilo": "primario" },
+      { "texto": "Ver certificações", "ancora": "#certificacoes", "icone": "award", "estilo": "fantasma" }
+    ]
   }
 }
