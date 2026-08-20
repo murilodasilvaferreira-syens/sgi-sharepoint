@@ -1,5 +1,5 @@
 {
-  "_comentario": "Cards de acesso rápido no topo do site. Cada item tem um ícone: 'tipoIcone' pode ser \"lucide\" (nome de um ícone de https://lucide.dev/icons) ou \"imagem\" (caminho de um arquivo em /imagens). Exemplo para adicionar um novo item: { \"titulo\": \"Meu Link\", \"link\": \"https://...\", \"tipoIcone\": \"lucide\", \"valorIcone\": \"link\" }",
+  "_comentario": "Cards de acesso rápido no topo do site. Todos os itens usam ícones da biblioteca Lucide para manter o visual padronizado — o 'valorIcone' é o nome do ícone, escolhido em https://lucide.dev/icons. Para adicionar um card novo, copie um bloco inteiro (entre chaves), cole antes do último colchete e troque titulo, link e valorIcone. Lembre-se da vírgula separando um bloco do outro (o último bloco NÃO leva vírgula).",
 
   "tituloSecao": "Links Rápidos",
 
@@ -18,21 +18,21 @@
     },
     {
       "titulo": "Lista Mestra",
-      "link": "https://syensqosa.sharepoint.com/:x:/r/sites/shdqhsescogbunovecare/_layouts/15/Doc.aspx?sourcedoc=%7B2C42CBAB-D30C-4260-949E-258CC75DE61A%7D&file=Lista%20Mestra%20de%20Documentos%2004-08-2026.xlsx&action=default&mobileredirect=true",
+      "link": "https://syensqosa.sharepoint.com/:x:/r/sites/shdqhsescogbunovecare/_layouts/15/Doc.aspx?sourcedoc=%7B2C42CBAB-D30C-4260-949E-258CC75DE61A%7D&file=Lista%20Mestra%20de%20Documentos%20SGI.xlsx",
       "tipoIcone": "lucide",
       "valorIcone": "list-checks"
     },
     {
       "titulo": "Boletim da Qualidade",
-      "link": "https://syensqosa-my.sharepoint.com/shared?id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F8%29%20BOLETIM&listurl=https%3A%2F%2Fsyensqosa%2Esharepoint%2Ecom%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents&viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3",
-      "tipoIcone": "imagem",
-      "valorIcone": "imagens/LINKS_BOLETIMQUALIDADE.jpeg"
+      "link": "https://syensqosa-my.sharepoint.com/shared?id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F8%29%20BOLETIM&listurl=https%3A%2F%2Fsyensqosa%2Esharepoint%2Ecom%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents",
+      "tipoIcone": "lucide",
+      "valorIcone": "newspaper"
     },
     {
       "titulo": "Lista de Ramais",
-      "link": "https://syensqosa.sharepoint.com/:x:/r/sites/shdqhsescogbunovecare/_layouts/15/Doc.aspx?sourcedoc=%7B7D314EE6-5F62-4C75-A97B-6F69166215A8%7D&file=LISTA%20DE%20RAMAIS%20-%202026.xlsx&action=default&mobileredirect=true",
-      "tipoIcone": "imagem",
-      "valorIcone": "imagens/LINKS_LISTARAMAIS.jpeg"
+      "link": "https://syensqosa.sharepoint.com/:x:/r/sites/shdqhsescogbunovecare/_layouts/15/Doc.aspx?sourcedoc=%7B7D314EE6-5F62-4C75-A97B-6F69166215A8%7D&file=LISTA%20DE%20RAMAIS%20-%202026.xlsx",
+      "tipoIcone": "lucide",
+      "valorIcone": "phone"
     }
   ]
 }
