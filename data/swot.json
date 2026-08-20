@@ -1,41 +1,55 @@
 {
-  "_comentario": "Conteúdo da matriz SWOT. Cada quadrante tem uma 'cor' — use apenas uma destas 4 palavras: \"verde\", \"vermelho\", \"azul\" ou \"laranja\". 'itens' é a lista de pontos daquele quadrante (ainda são só placeholders — substitua pelo conteúdo real). Exemplo para adicionar um item a um quadrante: adicione uma linha em \"itens\": [ ..., \"Meu novo ponto\" ]",
+  "_comentario": "Conteúdo da matriz SWOT. Cada quadrante tem uma 'cor' — use apenas uma destas 4 palavras: \"verde\", \"vermelho\", \"azul\" ou \"laranja\". 'origem' é o selo pequeno no canto do card (\"Interno\" ou \"Externo\"). 'descricao' é o texto que explica o que aquele quadrante significa. 'itens' é a lista de perguntas-guia que ajudam o time a preencher o quadrante — quando o mapeamento real estiver pronto, troque estes itens pelos pontos levantados.",
 
   "tituloSecao": "Matriz SWOT",
 
-  "linkMapeamentoCompleto": "https://syensqosa.sharepoint.com/:x:/r/sites/shdqhsescogbunovecare/_layouts/15/Doc.aspx?sourcedoc=%7B2C0E4367-5E1C-48A7-B3FA-9F0D128894A5%7D&file=Mapeamento%20de%20Processo_Itatiba%20e%20Tabo%C3%A3o.xlsx&action=default&mobileredirect=true",
+  "descricaoSecao": "Ferramenta de diagnóstico estratégico: cruza o que está sob nosso controle (forças e fraquezas) com o que vem de fora (oportunidades e ameaças), orientando as ações do SGI.",
+
+  "linkMapeamentoCompleto": "https://syensqosa.sharepoint.com/:x:/r/sites/shdqhsescogbunovecare/_layouts/15/Doc.aspx?sourcedoc=%7B2C0E4367-5E1C-48A7-B3FA-9F0D128894A5%7D",
 
   "quadrantes": [
     {
       "tipo": "Forças",
       "cor": "verde",
+      "origem": "Interno · Ajuda",
+      "descricao": "São as vantagens que já temos dentro de casa e que dependem apenas de nós para serem mantidas: competências da equipe, processos maduros, certificações conquistadas, equipamentos e tecnologia disponíveis.",
       "itens": [
-        "Placeholder — preencher com um ponto forte",
-        "Placeholder — preencher com um ponto forte"
+        "O que fazemos consistentemente melhor do que a concorrência?",
+        "Que recursos, certificações ou competências já dominamos?",
+        "Quais processos do SGI já são reconhecidos como referência?"
       ]
     },
     {
       "tipo": "Fraquezas",
       "cor": "vermelho",
+      "origem": "Interno · Atrapalha",
+      "descricao": "São as limitações internas que atrapalham os resultados e que também estão sob nosso controle para corrigir: lacunas de treinamento, retrabalho, gargalos de processo, documentação desatualizada ou indicadores sem acompanhamento.",
       "itens": [
-        "Placeholder — preencher com um ponto fraco",
-        "Placeholder — preencher com um ponto fraco"
+        "Onde ainda ocorrem retrabalho, atrasos ou não conformidades recorrentes?",
+        "Que conhecimento ou recurso nos falta hoje para atingir a meta?",
+        "Quais processos dependem demais de uma única pessoa?"
       ]
     },
     {
       "tipo": "Oportunidades",
       "cor": "azul",
+      "origem": "Externo · Ajuda",
+      "descricao": "São movimentos de fora da organização que podemos aproveitar a nosso favor: novas exigências de mercado que já atendemos, tecnologias emergentes, demanda por produtos certificados, parcerias e mudanças no comportamento dos clientes.",
       "itens": [
-        "Placeholder — preencher com uma oportunidade",
-        "Placeholder — preencher com uma oportunidade"
+        "Que tendências de mercado favorecem quem já é certificado?",
+        "Quais tecnologias podem reduzir custo ou aumentar a confiabilidade?",
+        "Que novos clientes ou segmentos nossas certificações abrem?"
       ]
     },
     {
       "tipo": "Ameaças",
       "cor": "laranja",
+      "origem": "Externo · Atrapalha",
+      "descricao": "São fatores externos que podem prejudicar os resultados e que não controlamos — apenas nos preparamos para eles: mudanças em normas e legislação, exigências novas de clientes e auditorias, instabilidade de fornecedores e pressão competitiva.",
       "itens": [
-        "Placeholder — preencher com uma ameaça",
-        "Placeholder — preencher com uma ameaça"
+        "Que mudanças em normas ou legislação podem nos impactar?",
+        "Que riscos de fornecimento ou de matéria-prima estão no horizonte?",
+        "O que a concorrência oferece que os clientes já começam a exigir?"
       ]
     }
   ]
