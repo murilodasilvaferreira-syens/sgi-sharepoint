@@ -1371,123 +1371,45 @@ section[id] {
 
 /* ---- 8. MATRIZ SWOT ------------------------------------------------------ */
 
+/* Matriz de verdade: 2 x 2. Diferente das outras seções, aqui NÃO usamos
+   auto-fit — a leitura da SWOT depende de ver os quatro quadrantes em
+   bloco (interno em cima, externo embaixo), então a grade é fixa.
+   No mobile (abaixo de 760px) vira uma coluna só, empilhada. */
 .swot-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr;
   gap: var(--espaco-lg);
-  align-items: start;
+  /* align-items:stretch é o padrão do grid, mas deixamos explícito:
+     é ele que faz todos os cards da mesma linha terem a MESMA altura,
+     independentemente do tamanho do texto de cada um. */
+  align-items: stretch;
+}
+
+@media (min-width: 760px) {
+  .swot-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .swot-quadrante {
+  /* flex-column + height:100% faz o card ocupar toda a altura que a
+     linha do grid lhe dá — sem isso, o card encolhe até o conteúdo e
+     os dois da mesma linha ficam desalinhados na base. */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   padding: var(--espaco-lg);
   overflow: hidden;
-  /* --cor-quadrante é redefinida por cada modificador de cor abaixo */
   --cor-quadrante: var(--cor-acento);
 }
 
-/* Faixa colorida no topo, identificando o quadrante */
-.swot-quadrante::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--cor-quadrante);
-  opacity: 0.85;
-  transition: opacity var(--transicao-padrao);
-}
-
-.swot-quadrante:hover::after { opacity: 1; }
-
-.swot-verde    { --cor-quadrante: var(--cor-swot-verde); }
-.swot-vermelho { --cor-quadrante: var(--cor-swot-vermelho); }
-.swot-azul     { --cor-quadrante: var(--cor-swot-azul); }
-.swot-laranja  { --cor-quadrante: var(--cor-swot-laranja); }
-
-.swot-cabecalho {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--espaco-sm);
-  margin-bottom: var(--espaco-md);
-}
-
-.swot-icone {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--raio-sm);
-  /* 12% da cor do quadrante sobre branco: fundo suave, ícone legível */
-  background: color-mix(in srgb, var(--cor-quadrante) 12%, var(--cor-branco));
-  color: var(--cor-quadrante);
-  transition: transform var(--transicao-padrao);
-}
-
-.swot-quadrante:hover .swot-icone { transform: scale(1.06); }
-
-.swot-icone i,
-.swot-icone svg {
-  width: 20px;
-  height: 20px;
-}
-
-.swot-cabecalho h3 {
-  margin: 0;
-  flex: 1;
-  color: var(--cor-quadrante);
-}
-
-/* Selo "Interno · Ajuda" / "Externo · Atrapalha" */
-.swot-origem {
-  padding: 3px 10px;
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-pill);
-  background: var(--cor-fundo-alt);
-  color: var(--cor-texto-claro);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-/* Texto explicativo do que aquele quadrante significa */
-.swot-descricao {
-  margin: 0 0 var(--espaco-md);
-  color: var(--cor-texto);
-  font-size: 0.92rem;
-  line-height: 1.65;
-}
-
-/* Perguntas-guia do quadrante */
+/* Empurra a lista de perguntas para a base do card: com descrições de
+   tamanhos diferentes, os quatro blocos de perguntas ficam alinhados
+   entre si, o que dá o aspecto de matriz simétrica. */
 .swot-lista {
+  margin-top: auto;
   padding-top: var(--espaco-md);
   border-top: 1px solid var(--cor-borda);
-}
-
-.swot-lista li {
-  position: relative;
-  padding-left: var(--espaco-lg);
-  margin-bottom: var(--espaco-sm);
-  color: var(--cor-texto-claro);
-  font-size: var(--fs-pequeno);
-}
-
-.swot-lista li:last-child { margin-bottom: 0; }
-
-/* Marcador circular na cor do quadrante */
-.swot-lista li::before {
-  content: '';
-  position: absolute;
-  left: 4px;
-  top: 0.6em;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--cor-quadrante);
 }
 
 /* ---- 9. OITO REGRAS DA QUALIDADE ----------------------------------------- */
