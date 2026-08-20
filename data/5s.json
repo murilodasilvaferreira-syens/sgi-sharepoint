@@ -1,9 +1,9 @@
 {
-  "_comentario": "Conteúdo da seção do Programa 5S. 'sensos' é a lista dos 5 pilares, na ordem em que aparecem na página. 'links' são os botões no final da seção, um por unidade. As descrições abaixo são um texto-padrão da metodologia 5S — ajuste como preferir. Exemplo para adicionar um novo link de unidade: { \"rotulo\": \"Paulínia\", \"link\": \"https://...\" }",
+  "_comentario": "Conteúdo da seção do Programa 5S. 'sensos' é a lista dos 5 pilares, na ordem em que aparecem na página. 'links' são os botões no final da seção, um por unidade. As descrições podem ser reescritas livremente. Os ícones ficam na pasta /imagens.",
 
   "tituloSecao": "Programa 5S",
 
-  "imagemPrincipal": "imagens/5S_GENERAL_BACKGROUD.jpeg",
+  "descricaoSecao": "Cinco sensos que sustentam um ambiente de trabalho organizado, seguro e produtivo — a base prática da nossa cultura de qualidade.",
 
   "sensos": [
     {
@@ -41,11 +41,11 @@
   "links": [
     {
       "rotulo": "Itatiba",
-      "link": "https://syensqosa-my.sharepoint.com/shared?id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F16%29%205S%5F2026%2F3S%20%2D%20Itatiba&listurl=https%3A%2F%2Fsyensqosa%2Esharepoint%2Ecom%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents&viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3"
+      "link": "https://syensqosa-my.sharepoint.com/shared?id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F16%29%205S%5F2026%2F3S%20%2D%20Itatiba"
     },
     {
       "rotulo": "Taboão",
-      "link": "https://syensqosa-my.sharepoint.com/shared?id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F16%29%205S%5F2026%2F3S%2DTabo%C3%A3o&listurl=https%3A%2F%2Fsyensqosa%2Esharepoint%2Ecom%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents&viewid=ed03e092%2D9620%2D4e56%2Daff9%2Dab204bf12bb3"
+      "link": "https://syensqosa-my.sharepoint.com/shared?id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F16%29%205S%5F2026%2F3S%2DTabo%C3%A3o"
     }
   ]
 }
