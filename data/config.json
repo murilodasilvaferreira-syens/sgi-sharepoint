@@ -18,15 +18,13 @@
     { "rotulo": "8 Regras", "ancora": "#oito-regras", "icone": "shield-check" }
   ],
 
-  "hero": {
+    "hero": {
     "eyebrow": "Syensqo Brasil · Qualidade e HSE",
     "titulo": "Sistema de Gestão Integrado",
     "tituloDestaque": "que transforma padrão em resultado",
     "unidades": ["Itatiba", "Taboão da Serra", "Paulínia"],
-    "frase": "Qualidade não é um ato, é um hábito.",
-    "acoes": [
-      { "texto": "Acessar links rápidos", "ancora": "#links-rapidos", "icone": "zap", "estilo": "primario" },
-      { "texto": "Ver certificações", "ancora": "#certificacoes", "icone": "award", "estilo": "fantasma" }
+    "frase": "Qualidade não é um ato, é um hábito."
+    }
     ]
   }
 }
