@@ -7,10 +7,10 @@
 
   "sensos": [
     {
-      "nome": "Seiri",
+      "nome": "SEIRI",
       "traducao": "Utilização",
       "icone": "imagens/5S_SEIRI.jpeg",
-      "descricao": "TESTE.Separar o que é necessário do que é dispensável, eliminando excessos no ambiente de trabalho."
+      "descricao": "Separar o que é necessário do que é dispensável, eliminando excessos no ambiente de trabalho."
     },
     {
       "nome": "SEITON",
