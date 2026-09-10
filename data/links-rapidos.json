@@ -23,8 +23,14 @@
       "valorIcone": "list-checks"
     },
     {
-      "titulo": "Boletim da Qualidade",
-      "link": "https://syensqosa-my.sharepoint.com/shared?id=%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents%2FSGI%2F8%29%20BOLETIM&listurl=https%3A%2F%2Fsyensqosa%2Esharepoint%2Ecom%2Fsites%2Fshdqhsescogbunovecare%2FShared%20Documents",
+      "titulo": "Boletim da Qualidade - Itatiba",
+      "link": "https://outlook.office.com/newsletters/pages/2a5ccff114c34644898fdff30c2441a61a/read",
+      "tipoIcone": "lucide",
+      "valorIcone": "newspaper"
+    },
+    {
+      "titulo": "Boletim da Qualidade - Taboão",
+      "link": "https://outlook.office.com/newsletters/pages/2a5ccff114c34644898fdff30c2441a61a/read",
       "tipoIcone": "lucide",
       "valorIcone": "newspaper"
     },
