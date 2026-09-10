@@ -25,18 +25,8 @@
 </head>
 <body>
 
-  <!-- Link de acessibilidade: permite pular a navegação usando o teclado -->
+  <!-- Link de acessibilidade: permite pular direto ao conteúdo pelo teclado -->
   <a class="pular-conteudo" href="#conteudo-principal">Pular para o conteúdo</a>
-
-  <!-- ===================================================================
-       NAVEGAÇÃO
-       Fica "sticky" (gruda no topo ao rolar), nunca "fixed" — isso é
-       necessário para funcionar corretamente dentro do iframe do
-       SharePoint. Os itens do menu vêm de data/config.json (menu).
-       Não há marca/logo à esquerda: o menu é o único elemento, o que
-       deixa o cabeçalho mais limpo e dá espaço para os 9 itens.
-       =================================================================== -->
-  
 
   <main id="conteudo-principal">
 
@@ -76,9 +66,10 @@
     <section id="oito-regras" class="secao secao-oito-regras"></section>
 
     <!-- A seção "Indicadores" foi removida por enquanto; será reintroduzida
-         na Fase 2 do projeto. Para trazê-la de volta: recrie a <section
-         id="indicadores">, o item no "menu" de data/config.json e a
-         entrada correspondente em SECOES no js/main.js. -->
+         na Fase 2 do projeto. O conteúdo dela continua pronto em
+         data/indicadores.json. Para trazê-la de volta: recrie a <section
+         id="indicadores"> aqui e a entrada correspondente em SECOES no
+         js/main.js. -->
 
   </main>
 

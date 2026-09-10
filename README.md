@@ -36,7 +36,7 @@ cada arquivo:
 
 | Arquivo | O que controla |
 |---|---|
-| `data/config.json` | Título e unidades exibidas na capa (Hero), frases que giram automaticamente, itens do menu de navegação (com ícone) e o texto do rodapé. |
+| `data/config.json` | Título da aba, texto do rodapé e todo o conteúdo da capa (Hero): selo, título, unidades e a frase de destaque. |
 | `data/links-rapidos.json` | Os 5 cards de acesso rápido no topo (PDQ/NC, NC Fornecedor, etc). |
 | `data/certificacoes.json` | Os selos de certificação (ISO, HALAL, RSPO...) e os links de cada certificado. |
 | `data/politicas.json` | As políticas (Qualidade, HSE, Halal, Atuação Responsável). |
@@ -45,27 +45,26 @@ cada arquivo:
 | `data/documentos-padrao.json` | Os documentos RHSco-002 e RHSco-003. |
 | `data/swot.json` | Os 4 quadrantes da Matriz SWOT. |
 | `data/oito-regras.json` | As 8 Regras da Qualidade (resumo e texto completo de cada uma). |
-| `data/indicadores.json` | O texto da seção "Indicadores" (ainda em construção). |
+| `data/indicadores.json` | Texto da seção "Indicadores". A seção está desativada no site e volta na Fase 2 — o arquivo fica guardado até lá. |
 
 ### Exemplo prático: a capa do site (`data/config.json`)
 
 ```json
 "hero": {
-  "titulo": "Sistema de Gestão Integrado – SGI",
+  "eyebrow": "Syensqo Brasil · Qualidade e HSE",
+  "titulo": "Sistema de Gestão Integrado",
+  "tituloDestaque": "que transforma padrão em resultado",
   "unidades": ["Itatiba", "Taboão da Serra", "Paulínia"],
-  "frases": ["Frase 1", "Frase 2", "Frase 3"],
-  "intervaloTrocaFraseMs": 6000
+  "frase": "Qualidade não é um ato, é um hábito."
 }
 ```
 
-- `"unidades"` é a lista de unidades mostrada no selo pequeno acima do
-  título — para adicionar uma unidade nova, basta acrescentar um nome
-  na lista.
-- `"frases"` pode ter quantos itens quiser; eles alternam automaticamente
-  na tela a cada `"intervaloTrocaFraseMs"` milissegundos (6000 = 6 segundos).
-- Cada item de `"menu"` também tem um campo `"icone"` (nome de um ícone
-  de [lucide.dev/icons](https://lucide.dev/icons)), usado no menu do
-  celular — no computador o menu fica só com texto, sem ícones.
+- `"eyebrow"` é o selo pequeno que aparece acima do título.
+- `"titulo"` é o título grande. O texto de `"tituloDestaque"` continua a
+  frase e aparece pintado com o degradê laranja.
+- `"unidades"` é a lista mostrada abaixo do título — para incluir uma
+  unidade nova, basta acrescentar o nome na lista.
+- `"frase"` é a citação exibida no fim da capa.
 
 ### Exemplo prático: adicionar um novo item de Link Rápido
 
@@ -163,11 +162,11 @@ você.
 ## Sobre a incorporação no site do SharePoint
 
 O portal é embutido no SharePoint através de um "web part" de
-incorporação (iframe). Para o menu do site funcionar corretamente
-"grudado" no topo durante a rolagem, **configure o iframe com uma
-altura fixa** (por exemplo, 90% da altura da tela), em vez de deixar
-que ele cresça automaticamente para caber todo o conteúdo. Isso é uma
-opção do próprio web part de incorporação do SharePoint.
+incorporação (iframe). Para a rolagem ficar contida dentro do quadro do
+portal, **configure o iframe com uma altura fixa** (por exemplo, 90% da
+altura da tela), em vez de deixar que ele cresça automaticamente para
+caber todo o conteúdo. Isso é uma opção do próprio web part de
+incorporação do SharePoint.
 
 ---
 

@@ -1,3 +1,16 @@
-# Documento-fonte usado só para extrair os links originais (Etapa 1).
+# Documento-fonte usado só para extrair os links originais.
 # O conteúdo dele já foi transcrito para os arquivos em /data.
 *.docx
+~$*.docx
+
+# Arquivos gerados pelo Windows / OneDrive
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Arquivos gerados pelo macOS
+.DS_Store
+
+# Configurações locais de editor
+.vscode/
+.idea/

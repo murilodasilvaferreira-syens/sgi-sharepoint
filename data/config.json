@@ -1,22 +1,10 @@
 {
-  "_comentario": "Configurações gerais do site: título da aba do navegador, rodapé, itens do menu de navegação e o conteúdo da capa (Hero). Para adicionar um item ao menu, copie um bloco dentro de 'menu' e troque o rótulo, a âncora (o id da seção no index.html, começando com #) e o ícone (nome de https://lucide.dev/icons). No 'hero': 'titulo' é o título grande; a parte escrita em 'tituloDestaque' aparece pintada com o degradê laranja; 'frase' é a citação única abaixo do título.",
+  "_comentario": "Configurações gerais do site: título da aba do navegador, texto do rodapé e o conteúdo da capa (Hero). No 'hero': 'eyebrow' é o selo pequeno acima do título; 'titulo' é o título grande e a parte escrita em 'tituloDestaque' aparece pintada com o degradê laranja; 'unidades' é a lista mostrada abaixo do título; 'frase' é a citação no fim da capa.",
 
   "site": {
     "tituloAba": "Portal SGI - Syensqo",
     "textoRodape": "© 2026 Syensqo - Sistema de Gestão Integrado | Itatiba · Taboão da Serra · Paulínia"
   },
-
-  "menu": [
-    { "rotulo": "Início", "ancora": "#hero", "icone": "home" },
-    { "rotulo": "Links Rápidos", "ancora": "#links-rapidos", "icone": "zap" },
-    { "rotulo": "Certificações", "ancora": "#certificacoes", "icone": "award" },
-    { "rotulo": "Políticas", "ancora": "#politicas", "icone": "file-text" },
-    { "rotulo": "5S", "ancora": "#secao-5s", "icone": "layout-grid" },
-    { "rotulo": "Cronograma", "ancora": "#cronograma", "icone": "calendar" },
-    { "rotulo": "Documentos", "ancora": "#documentos-padrao", "icone": "file-check-2" },
-    { "rotulo": "SWOT", "ancora": "#swot", "icone": "grid-2x2" },
-    { "rotulo": "8 Regras", "ancora": "#oito-regras", "icone": "shield-check" }
-  ],
 
   "hero": {
     "eyebrow": "Syensqo Brasil · Qualidade e HSE",

@@ -74,7 +74,6 @@
 
   /* ---- Layout e movimento ---------------------------------------------- */
   --largura-maxima: 1200px;
-  --altura-nav: 64px;
   --transicao-padrao: 220ms cubic-bezier(0.22, 0.61, 0.36, 1);
   --transicao-lenta: 420ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
@@ -99,10 +98,8 @@ body {
   background: var(--cor-fundo);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  /* NÃO adicione "overflow-x: hidden" aqui: qualquer overflow diferente
-     de "visible" num ancestral cancela o position:sticky da .nav-topo,
-     e o menu para de grudar no topo ao rolar. O vazamento horizontal
-     das orbs já é contido pelo overflow:hidden do próprio .secao-hero. */
+  /* Não é preciso "overflow-x: hidden" aqui: o vazamento horizontal das
+     orbs decorativas já é contido pelo overflow:hidden do .secao-hero. */
 }
 
 h1, h2, h3, h4 {
@@ -141,11 +138,10 @@ button {
   cursor: pointer;
 }
 
-/* Todo mundo que precisa rolar até uma seção (menu, link âncora do card 5S)
-   fica com esse respiro no topo, para o título da seção não ficar escondido
-   atrás da navegação sticky. */
+/* Âncoras internas (como o link do card 5S, nas 8 Regras) precisam de um
+   respiro no topo para o título da seção não colar na borda da janela. */
 section[id] {
-  scroll-margin-top: calc(var(--altura-nav) + var(--espaco-lg));
+  scroll-margin-top: var(--espaco-lg);
 }
 
 /* ---- Acessibilidade -------------------------------------------------- */
@@ -420,154 +416,6 @@ section[id] {
 .animar-entrada.visivel {
   opacity: 1;
   transform: none;
-}
-
-/* =========================================================================
-   NAVEGAÇÃO (sticky, nunca fixed — ver README.md sobre iframe/SharePoint)
-   ========================================================================= */
-
-/* Sem cabeçalho fixo, âncoras internas (como o card 5S das 8 Regras)
-   só precisam de um respiro pequeno, não da altura de uma barra. */
-section[id] {
-  scroll-margin-top: var(--espaco-lg);
-}
-
-/* ---- Menu (mobile = painel flutuante; vira barra horizontal no desktop) --- */
-
-.nav-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: var(--espaco-md);
-  right: var(--espaco-md);
-  z-index: 2;
-  flex-direction: column;
-  gap: 2px;
-  margin-top: var(--espaco-sm);
-  padding: var(--espaco-sm);
-  background: var(--cor-branco);
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-md);
-  box-shadow: var(--sombra-hover);
-  opacity: 0;
-  transform: translateY(-8px);
-  transition: opacity var(--transicao-padrao), transform var(--transicao-padrao);
-}
-
-.nav-menu.aberto {
-  display: flex;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.nav-menu li a {
-  display: flex;
-  align-items: center;
-  gap: var(--espaco-sm);
-  padding: var(--espaco-sm) var(--espaco-md);
-  border-radius: var(--raio-sm);
-  color: var(--cor-texto);
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: background var(--transicao-padrao), color var(--transicao-padrao);
-}
-
-.nav-menu li a i,
-.nav-menu li a svg {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-  color: var(--cor-acento);
-}
-
-.nav-menu li a:hover,
-.nav-menu li a.ativo {
-  background: var(--cor-acento-suave);
-  color: var(--cor-acento);
-  text-decoration: none;
-}
-
-/* Fundo escurecido atrás do painel mobile — clicar nele fecha o menu.
-   É "absolute" (nunca "fixed") por causa do embed em iframe. */
-.nav-backdrop {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  height: 100vh;
-  background: rgba(43, 43, 43, 0.32);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--transicao-padrao);
-}
-
-.nav-backdrop.visivel {
-  display: block;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-@media (min-width: 900px) {
-  .nav-toggle,
-  .nav-backdrop {
-    display: none;
-  }
-
-  /* Sem marca à esquerda, o menu ocupa a barra inteira e é centralizado */
-  .nav-container { justify-content: center; }
-
-  .nav-menu {
-    display: flex;
-    position: static;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: clamp(var(--espaco-md), 2.2vw, var(--espaco-xl));
-    margin: 0;
-    padding: 0;
-    background: none;
-    border: none;
-    box-shadow: none;
-    opacity: 1;
-    transform: none;
-  }
-
-  .nav-menu li a {
-    position: relative;
-    padding: var(--espaco-sm) 0;
-    border-radius: 0;
-    font-size: 0.9rem;
-  }
-
-  /* Ícones existem só para o painel mobile — desktop fica limpo, sóbrio */
-  .nav-menu li a i,
-  .nav-menu li a svg { display: none; }
-
-  .nav-menu li a:hover,
-  .nav-menu li a.ativo {
-    background: none;
-    color: var(--cor-acento);
-  }
-
-  /* Indicador de item ativo/hover: traço em degradê desliza sob o texto */
-  .nav-menu li a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -2px;
-    height: 2px;
-    border-radius: var(--raio-pill);
-    background: var(--degrade-acento);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--transicao-padrao);
-  }
-
-  .nav-menu li a:hover::after,
-  .nav-menu li a.ativo::after { transform: scaleX(1); }
 }
 
 /* =========================================================================
