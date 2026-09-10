@@ -3,188 +3,188 @@
   "tituloSecao": "Cronograma de Auditoria",
   "linkPlanilhaCompleta": "https://syensqosa.sharepoint.com/:x:/r/sites/shdqhsescogbunovecare/_layouts/15/Doc.aspx?sourcedoc=%7B66BE78FC-5305-47BC-8984-A198CB593BE3%7D&file=Calend%C3%A1rio%20de%20auditorias%20.xlsx&action=default&mobileredirect=true",
   "tiposAuditoria": [
-    { "tipo": "Interna", "cor": "#1A4D8F" },
-    { "tipo": "Externa", "cor": "#E8630C" },
+    { "tipo": "Auditoria Interna", "cor": "#1A4D8F" },
+    { "tipo": "Auditoria Externa", "cor": "#E8630C" },
     { "tipo": "Certificação", "cor": "#0F9D58" }
   ],
   "eventos": [
     {
-      "titulo": "Auditoria Interna - Direção Industrial - Itatiba e Taboão",
+      "titulo": "Direção Industrial - Itatiba e Taboão",
       "dataInicio": "2026-09-01",
       "dataFim": "2026-09-02",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Qualidade e ME - Itatiba e Taboão",
+      "titulo": "Qualidade e ME - Itatiba e Taboão",
       "dataInicio": "2026-09-03",
       "dataFim": "2026-09-04",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Logística ITA - Itatiba",
+      "titulo": "Logística - Itatiba",
       "dataInicio": "",
       "dataFim": "",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Logística TAB - Taboão",
+      "titulo": "Logística - Taboão",
       "dataInicio": "",
       "dataFim": "",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Supply Chain - Itatiba e Taboão",
+      "titulo": "Supply Chain - Itatiba e Taboão",
       "dataInicio": "",
       "dataFim": "",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Comercializar - Cenesp",
+      "titulo": "Comercial - Cenesp",
       "dataInicio": "2026-08-31",
       "dataFim": "2026-09-01",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Controle analítico - Itatiba",
+      "titulo": "Controle Analítico - Itatiba",
       "dataInicio": "2026-10-09",
       "dataFim": "2026-10-10",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Controle analítico - Taboão",
+      "titulo": "Controle Analítico - Taboão",
       "dataInicio": "2026-09-17",
       "dataFim": "2026-09-18",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Produzir ITA - Itatiba",
+      "titulo": "Produção - Itatiba",
       "dataInicio": "2026-09-17",
       "dataFim": "2026-09-18",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Produzir TAB - Taboão",
+      "titulo": "Produção - Taboão",
       "dataInicio": "2026-09-15",
       "dataFim": "2026-09-16",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Manutenção ITA - Itatiba",
+      "titulo": "Manutenção - Itatiba",
       "dataInicio": "2026-09-16",
       "dataFim": "2026-09-17",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Manutenção TAB - Taboão",
+      "titulo": "Manutenção - Taboão",
       "dataInicio": "2026-08-27",
       "dataFim": "2026-08-28",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Processos - Itatiba e Taboão",
+      "titulo": "Processos - Itatiba e Taboão",
       "dataInicio": "",
       "dataFim": "",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Compras - Rochaverá",
+      "titulo": "Compras - Rochaverá",
       "dataInicio": "",
       "dataFim": "",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Customer Service - Rochaverá",
+      "titulo": "Customer Service - Rochaverá",
       "dataInicio": "2026-09-23",
       "dataFim": "2026-09-24",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Direção R&I - Paulínia",
+      "titulo": "Direção R&I - Paulínia",
       "dataInicio": "2026-09-23",
       "dataFim": "2026-09-24",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Laboratório de P&D | FQ e QA - Paulínia",
+      "titulo": "Laboratório FQ e QA - Paulínia",
       "dataInicio": "2026-09-23",
       "dataFim": "2026-09-24",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Laboratório de P&D | HPC - Paulínia",
+      "titulo": "Laboratório de HPC - Paulínia",
       "dataInicio": "2026-09-15",
       "dataFim": "2026-09-16",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Laboratório de P&D | IPS - Paulínia",
+      "titulo": "Laboratório IPS - Paulínia",
       "dataInicio": "",
       "dataFim": "",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Laboratório de P&D | Coatings - Paulínia",
+      "titulo": " Laboratório Coatings - Paulínia",
       "dataInicio": "",
       "dataFim": "",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Laboratório de P&D | Tecno Team - Paulínia",
+      "titulo": "Laboratório Tecno Team - Paulínia",
       "dataInicio": "2026-09-22",
       "dataFim": "2026-09-23",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Interna - Laboratório de P&D | Agro - Paulínia",
+      "titulo": "Laboratório Agro - Paulínia",
       "dataInicio": "2026-09-23",
       "dataFim": "2026-09-24",
       "tipo": "Interna",
       "unidade": "Itatiba"
     },
     {
-      "titulo": "Auditoria Externa ISO 9001 - Multisite",
+      "titulo": "ISO 9001 - Multisite",
       "dataInicio": "2026-10-05",
       "dataFim": "2026-10-06",
       "tipo": "Externa",
       "unidade": "Itatiba e Taboão"
     },
     {
-      "titulo": "Auditoria de Certificação RSPO",
+      "titulo": "RSPO",
       "dataInicio": "2026-10-20",
       "dataFim": "2026-10-22",
       "tipo": "Certificação",
       "unidade": "Itatiba e Taboão"
     },
     {
-      "titulo": "Auditoria Externa Atuação Responsável - Taboão",
+      "titulo": "Atuação Responsável - Taboão",
       "dataInicio": "2027-01-26",
       "dataFim": "2027-01-28",
       "tipo": "Externa",
       "unidade": "Taboão"
     },
     {
-      "titulo": "Auditoria Externa Atuação Responsável - Itatiba",
+      "titulo": "Atuação Responsável - Itatiba",
       "dataInicio": "2027-02-01",
       "dataFim": "2027-02-03",
       "tipo": "Externa",
