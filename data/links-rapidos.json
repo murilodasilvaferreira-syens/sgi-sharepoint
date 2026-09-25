@@ -6,13 +6,13 @@
   "itens": [
     {
       "titulo": "PDQ/NC",
-      "link": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=p_dgXhDUOE24dZPKEq3DDlHdQdzmRudIlRNH90jFlP5UQU9WRzcyVzlTTjhTQTYzM0lPQlVWNjlYRi4u",
+      "link": "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&id=p_dgXhDUOE24dZPKEq3DDnqpildbeb9KioPFcimQx5BUQU9WRzcyVzlTTjhTQTYzM0lPQlVWNjlYRiQlQCN0PWcu&analysis=false",
       "tipoIcone": "lucide",
       "valorIcone": "clipboard-list"
     },
     {
       "titulo": "NC Fornecedor",
-      "link": "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&id=p_dgXhDUOE24dZPKEq3DDnQ8OoDF77hLsUb-m4z7mpNURVFaT00zNVowSldHUDZBVkw3SEQ2RENZRS4u",
+      "link": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=p_dgXhDUOE24dZPKEq3DDnqpildbeb9KioPFcimQx5BUOUlHOEtRVVY1TkRESUQ5M0xFT1I5VEtNQSQlQCN0PWcu",
       "tipoIcone": "lucide",
       "valorIcone": "truck"
     },
