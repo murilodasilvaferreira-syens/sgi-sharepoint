@@ -163,11 +163,46 @@
       "unidade": "Itatiba"
     },
     {
-      "titulo": "RSPO",
-      "dataInicio": "2026-12-01",
-      "dataFim": "2026-12-02",
-      "tipo": "Certificação",
+      "titulo": "RSPO - Compras",
+      "dataInicio": "2026-11-03",
+      "dataFim": "2026-11-03",
+      "tipo": "Interna",
       "unidade": "Itatiba e Taboão"
+    },
+    {
+      "titulo": "RSPO - Supply Chain",
+      "dataInicio": "2026-11-04",
+      "dataFim": "2026-11-04",
+      "tipo": "Interna",
+      "unidade": "Itatiba e Taboão"
+    },
+    {
+      "titulo": "RSPO - Logística",
+      "dataInicio": "2026-11-04",
+      "dataFim": "2026-11-04",
+      "tipo": "Interna",
+      "unidade": "Itatiba"
+    },
+    {
+      "titulo": "RSPO - DCA",
+      "dataInicio": "2026-11-04",
+      "dataFim": "2026-11-04",
+      "tipo": "Interna",
+      "unidade": "Taboão"
+    },
+    {
+      "titulo": "RSPO",
+      "dataInicio": "2026-11-17",
+      "dataFim": "2026-11-17",
+      "tipo": "Externa",
+      "unidade": "Itatiba"
+    },
+    {
+      "titulo": "RSPO",
+      "dataInicio": "2026-11-18",
+      "dataFim": "2026-11-18",
+      "tipo": "Externa",
+      "unidade": "Taboão"
     },
     {
       "titulo": "Atuação Responsável - Taboão",
@@ -176,7 +211,7 @@
       "tipo": "Externa",
       "unidade": "Taboão"
     },
-    {
+     {
       "titulo": "Fórum ME",
       "dataInicio": "2026-09-21",
       "dataFim": "2026-09-21",
